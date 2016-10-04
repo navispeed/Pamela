@@ -1,24 +1,23 @@
-BCC=gcc
+CC=g++
 
 NAME=mypam.so
-CFLAGS=-fPIC -fno-stack-protector
+CFLAGS=
 
 LDFLAGS=-lcryptsetup
 
 SRC=	src/mypam.c	\
 	src/crypt.c
 
-OBJ=$(SRC:.c=.o)
 
 TEST=	$(SRC)		\
 	src/test.c
 
-OBJ_TEST=$(TEST:.c=.o)
+OBJ=$(TEST:.c=.o)
 
 all:	$(NAME)
 
 $(NAME):$(OBJ)
-	$(CC) -shared -rdynamic $(LDFLAGS) -o $(NAME)
+	g++ -o $(NAME) $(OBJ) -lpam -lpam_misc 
 
 clean:
 	rm -f $(OBJ)
@@ -30,6 +29,3 @@ re:	fclean all
 
 dep:
 	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev
-
-test: 	
-	make -f MakefileTest re
