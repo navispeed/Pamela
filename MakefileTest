@@ -1,11 +1,11 @@
 CC=g++
 
 NAME=mypam.so
-CFLAGS=
+CFLAGS=-I include -std=c++11 -Wall -Wextra
 
 LDFLAGS=-lcryptsetup
 
-SRC=	src/mypam.c	\
+SRC=	src/pam.c	\
 	src/crypt.c
 
 

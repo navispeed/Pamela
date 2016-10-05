@@ -1,11 +1,11 @@
 BCC=gcc
 
 NAME=mypam.so
-CFLAGS=-fPIC -fno-stack-protector
+CFLAGS=-fPIC -fno-stack-protector -I include -std=c11 -W -Wall -Wextra
 
 LDFLAGS=-lcryptsetup
 
-SRC=	src/mypam.c	\
+SRC=	src/pam.c	\
 	src/crypt.c
 
 OBJ=$(SRC:.c=.o)
@@ -29,7 +29,10 @@ fclean: clean
 re:	fclean all
 
 dep:
-	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev
+	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev libjson0 libjson0-dev
 
 test: 	
 	make -f MakefileTest re
+
+install:all
+	sudo ld -x --shared -o /lib/security/mypam.so mypam.o
