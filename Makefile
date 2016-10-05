@@ -29,7 +29,7 @@ fclean: clean
 re:	fclean all
 
 dep:
-	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev  libpam0g libpam0g-dev
+	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev
 
-test:
+test: 	
 	make -f MakefileTest re
