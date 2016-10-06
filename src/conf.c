@@ -1,6 +1,16 @@
 #include <json/json.h>
 #include <stdio.h>
+#include <string.h>
 #include "crypt.h"
+
+static struct {
+    char *name;
+    size_t shift;
+} strToMember[] = {
+        {"container_path", 0},
+        {"container_size", 8},
+        {NULL, 0}
+};
 
 static char	*read_whole_file(const char *path)
 {
@@ -31,11 +41,16 @@ t_param		*read_conf(const char *path)
     }
   enum json_type type;
   json_object_object_foreach(jobj, key, val) {
-    type = json_object_get_type(val);
-    if (type == json_type_string)
-      {
-	
+    int i = 0;
+
+    while (strToMember[i].name) {
+      if (strcmp(key, strToMember[i].name)) {
+        void *dest = (param + strToMember[i].shift);
+
       }
+      ++i;
+    }
   }
+  return param;
 }
 

@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <security/pam_appl.h>
-#include <security/pam_modules.h>
+#include "crypt.h"
 
 /*
  *
