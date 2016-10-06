@@ -29,6 +29,11 @@ int	                          volume_create(const char *path, const char *key)
   struct crypt_device         *cd;
   struct crypt_params_luks1   params;
 
+  if (geteuid())
+    {
+      printf("Using of libcryptsetup requires super user privileges.\n");
+      return (1);
+    }
   if (init(cd, path) == 0)
     {
       printf("Context is attached to the block %s", crypt_get_device_name(cd));
