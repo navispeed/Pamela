@@ -8,6 +8,7 @@ int       format(struct crypt_device *cd, struct crypt_params_luks1 params)
       &params) < 0)
     {
       fprintf(stderr, "crypt_format() failed\n");
+      perror("FORMAT");
       return (-1);
     }
   return (0);
@@ -35,6 +36,5 @@ int	                          volume_create(const char *path, const char *key)
   params.data_alignment = 0;
   params.data_device = NULL;
   format(cd, params);
-  fprintf(stderr, "Runtime error\n");
   return (-1);
 }
