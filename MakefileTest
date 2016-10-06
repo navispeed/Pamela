@@ -1,18 +1,18 @@
 CC=g++
 
-NAME=mypam.test
+NAME=mypam
+
 CFLAGS=-I include -std=c++11 -Wall -Wextra
 
-LDFLAGS=-lcryptsetup -lpam -lpam_misc 
+LDFLAGS=-lcryptsetup -lpam -lpam_misc -l json
 
 SRC=	src/pam.c	\
 	src/crypt.c
 
-
 TEST=	$(SRC)		\
 	src/test.c
 
-OBJ=$(TEST:.c=.o)
+OBJ=	$(TEST:.c=.o)
 
 all:	$(NAME)
 

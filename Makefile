@@ -3,17 +3,16 @@ BCC=gcc
 NAME=mypam.so
 CFLAGS=-fPIC -fno-stack-protector -I include -std=c11 -W -Wall -Wextra
 
-LDFLAGS=-lcryptsetup
+LDFLAGS=-lcryptsetup -l json
 
 SRC=	src/pam.c	\
-	src/crypt.c
+	src/crypt.c	\
+	src/conf.c	
 
 OBJ=$(SRC:.c=.o)
 
 TEST=	$(SRC)		\
 	src/test.c
-
-OBJ_TEST=$(TEST:.c=.o)
 
 all:	$(NAME)
 
