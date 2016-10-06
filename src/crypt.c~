@@ -1,6 +1,0 @@
-#include <stdbool.h>
-
-int	crypt(const char *path)
-{
-  
-}
