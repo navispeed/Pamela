@@ -1,9 +1,9 @@
 CC=g++
 
-NAME=mypam.so
+NAME=mypam.test
 CFLAGS=-I include -std=c++11 -Wall -Wextra
 
-LDFLAGS=-lcryptsetup
+LDFLAGS=-lcryptsetup -lpam -lpam_misc 
 
 SRC=	src/pam.c	\
 	src/crypt.c
@@ -17,7 +17,7 @@ OBJ=$(TEST:.c=.o)
 all:	$(NAME)
 
 $(NAME):$(OBJ)
-	g++ -o $(NAME) $(OBJ) -lpam -lpam_misc 
+	g++ -o $(NAME) $(OBJ) $(LDFLAGS)
 
 clean:
 	rm -f $(OBJ)

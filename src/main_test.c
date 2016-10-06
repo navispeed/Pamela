@@ -1,5 +1,6 @@
 int   main(int ac, char **av)
 {
-    volume_create(av[1], av[2]);
-    return (0);
+  //    volume_create(av[1], av[2]);
+  write_urandom("./test", 512000);
+  return (0);
 }

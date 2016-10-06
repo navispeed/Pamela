@@ -34,6 +34,7 @@ PAM_EXTERN int pam_sm_authenticate(__attribute__((unused)) pam_handle_t *pamh, _
 
   fprintf(stderr, "Welcome %s\n", pUsername);
 
+  
   if (retval != PAM_SUCCESS) {
     return retval;
   }
