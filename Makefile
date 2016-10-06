@@ -31,7 +31,7 @@ re:	fclean all
 dep:
 	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev libjson0 libjson0-dev
 
-test: 	
+test:
 	make -f MakefileTest re
 
 install:all
