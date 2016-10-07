@@ -74,6 +74,20 @@ int                           format(struct crypt_device *cd,
   return (0);
 }
 
+struct crypt_device           *init_device(struct crypt_device *cd,
+                                          const char *path)
+{
+  int                         r;
+
+  if ((r = crypt_init(&cd, path)) < 0) //TODO : migrate to function init()
+    {
+      fprintf(stderr, "crypt_init failed on path %s with error %d\n", path, r);
+      perror("INIT");
+      return (NULL);
+    }
+  return (cd);
+}
+
 int	                          volume_create(const char *path, const char *key,
                                             const char *device_name)
 {
@@ -86,12 +100,6 @@ int	                          volume_create(const char *path, const char *key,
       printf("Using of libcryptsetup requires super user privileges.\n");
       return (1);
     }
-  if ((r = crypt_init(&cd, path)) < 0) //TODO : migrate to function init()
-    {
-      fprintf(stderr, "crypt_init failed on path %s with error %d\n", path, r);
-      perror("INIT");
-      return (-1);
-    }
   printf("Context is attached to the block %s", crypt_get_device_name(cd));
   params.hash = "sha1";
   params.data_alignment = 0;
@@ -101,4 +109,3 @@ int	                          volume_create(const char *path, const char *key,
   crypt_free(cd);
   return (-1);
 }
-

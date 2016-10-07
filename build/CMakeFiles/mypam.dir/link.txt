@@ -1,0 +1,1 @@
+/usr/bin/cc     CMakeFiles/mypam.dir/src/crypt.c.o CMakeFiles/mypam.dir/src/main_test.c.o CMakeFiles/mypam.dir/src/conf.c.o CMakeFiles/mypam.dir/src/pam.c.o  -o mypam -rdynamic -lcryptsetup -ljson -lpam -lpam_misc 
