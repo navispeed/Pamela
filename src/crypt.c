@@ -32,7 +32,7 @@ int	        write_urandom(const char *path, size_t size)
         fprintf(stderr, "cannot open %s file", (fd_in == -1 ? "input" : "output"));
         return (-1);
     }
-    while (size > 0 && (readed = read(fd_in, buf, BS)) > 0)
+    while (size > 0 && (readed = (size_t) read(fd_in, buf, BS)) > 0)
     {
         write(fd_out, buf, readed);
         size = (size > readed ? size - readed : readed - size);
@@ -172,6 +172,7 @@ int                         desactivate_device(const char *device_name)
     return (r);
   }
   printf("Device %s is now deactivated.\n", device_name);
+  return 0;
 }
 
 int                         volume_mount(const char *device_name)
