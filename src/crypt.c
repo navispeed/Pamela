@@ -176,7 +176,7 @@ int                         desactivate_device(const char *device_name)
 
 int                         volume_mount(const char *device_name)
 {
-  char                      *path_to_device;
+  char                      path_to_device[BS];
 
   sprintf(path_to_device, "%s/%s",crypt_get_dir() , device_name);
   printf("The path of mount is %s\n", path_to_device);
