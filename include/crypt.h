@@ -16,6 +16,7 @@ typedef struct s_param t_param;
 struct s_param
 {
   const char		*container_path; //Relative or absolute path
+  const char		*mount_point; //Relative or absolute path
   size_t		container_size; //in Mo
 };
 

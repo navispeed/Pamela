@@ -1,5 +1,5 @@
 {
     "container_path": "~/container",
-    "": "",
-    "container_size": 512 //In Mo 
+    "container_size": 512, //In Mo
+    "mount_point": "~/encrypted/"
 }

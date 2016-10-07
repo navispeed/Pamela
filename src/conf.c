@@ -74,10 +74,12 @@ t_param *read_conf(const char *path) {
         perror("not a valid config file");
     }
     const char *container_path = find_string(jobj, param, "container_path");
+    const char *mount_point = (const size_t) find_string(jobj, param, "mount_point");
     const size_t container_size = (const size_t) find_int(jobj, param, "container_size");
 
     param->container_path = container_path;
     param->container_size = container_size;
+    param->mount_point = mount_point;
     return param;
 }
 
