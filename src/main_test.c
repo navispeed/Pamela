@@ -9,10 +9,10 @@ void     test_urandom(){
     struct stat s = {0};
 
     unlink("./test");
-    write_urandom("./test", 512000);
+    write_urandom("./test", 51200000);
     int rv = stat("./test", &s);
     assert(rv != -1);
-    assert(s.st_size == 512000);
+    assert(s.st_size == 51200000);
     fprintf(stdout, "test_urandom PASSED\n");
 }
 
@@ -34,7 +34,7 @@ void test_volume_create()
 int   main(int ac, char **av)
 {
     test_urandom();
-    test_read_conf();
-//    volume_create(av[1], av[2], av[3]);
+//    test_read_conf();
+    volume_create(av[1], av[2], av[3]);
     return (0);
 }

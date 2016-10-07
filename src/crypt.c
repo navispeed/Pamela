@@ -32,8 +32,6 @@ int	write_urandom(const char *path, size_t size)
     return (0);
 }
 
-
-
 static int                    free_crypt(struct crypt_device *cd)
 {
   crypt_free(cd);
@@ -59,24 +57,45 @@ int                           format(struct crypt_device *cd,
                                      const char *device_name)
 {
   struct crypt_active_device  cad;
+  int                         r;
 
-  if (crypt_format(cd, CRYPT_LUKS1, "aes", "xts-plain64", NULL, NULL, 256 / 8,
-      &params) < 0)
+  if ((r = crypt_format(cd, CRYPT_LUKS1, "aes", "xts-plain64", NULL, NULL,
+      256 / 8, &params)) < 0)
     {
       fprintf(stderr, "crypt_format() failed\n");
       perror("FORMAT");
-      return (-1);
+      return (r);
     }
-  crypt_load(cd, CRYPT_LUKS1, NULL);
-  crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
-                               key, strlen(key), CRYPT_ACTIVATE_READONLY);
-  crypt_get_active_device(cd, device_name, &cad);
+  if ((r = crypt_load(cd, CRYPT_LUKS1, NULL)) < 0)
+  {
+    fprintf(stderr, "crypt_load() failed\n");
+    perror("LOAD");
+    return (r);
+  }
+  printf("LUKS device %s/%s gonna be activate.\n", crypt_get_dir(), device_name);
+  printf("\tcipher used: %s\n", crypt_get_cipher(cd));
+  printf("\tcipher mode: %s\n", crypt_get_cipher_mode(cd));
+  printf("\tdevice UUID: %s\n", crypt_get_uuid(cd));
+  if ((r = crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
+                               key, strlen(key), CRYPT_ACTIVATE_READONLY)) < 0)
+  {
+    fprintf(stderr, "crypt_activate_by_passphrase() failed\n");
+    perror("ACTIVATE");
+    return (r);
+  }
+  printf("LUKS device %s/%s is active.\n", crypt_get_dir(), device_name);
+  if ((r = crypt_get_active_device(cd, device_name, &cad)) < 0)
+  {
+    fprintf(stderr, "crypt_get_active_device() failed\n");
+    perror("ACTIVE");
+    return (r);
+  }
   return (0);
 }
 
-struct crypt_device           *init_device(struct crypt_device *cd,
-                                          const char *path)
+struct crypt_device           *init_device(const char *path)
 {
+  struct crypt_device         *cd;
   int                         r;
 
   if ((r = crypt_init(&cd, path)) < 0) //TODO : migrate to function init()
@@ -100,12 +119,13 @@ int	                          volume_create(const char *path, const char *key,
       printf("Using of libcryptsetup requires super user privileges.\n");
       return (1);
     }
-  printf("Context is attached to the block %s", crypt_get_device_name(cd));
+  cd = init_device(path);
+  printf("Context is attached to the block %s\n", crypt_get_device_name(cd));
   params.hash = "sha1";
   params.data_alignment = 0;
   params.data_device = NULL;
-  if (format(cd, params, key, device_name) < 0)
-    fprintf(stderr, "crypt_init failed on path %s with error %d\n", path, r);
+  if ((r = format(cd, params, key, device_name)) < 0)
+    fprintf(stderr, "format() failed on path %s with error %d\n", path, r);
   crypt_free(cd);
   return (-1);
 }
