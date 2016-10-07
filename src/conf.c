@@ -66,6 +66,9 @@ t_param *read_conf(const char *path) {
     t_param *param = new_conf();
     char *string = read_whole_file(path);
 
+    if (string == NULL) {
+        return param;
+    }
     json_object *jobj = json_tokener_parse(string);
     if (json_object_get_type(jobj) != json_type_object) {
         perror("not a valid config file");
