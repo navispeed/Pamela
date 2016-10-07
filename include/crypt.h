@@ -16,7 +16,14 @@ typedef struct s_param t_param;
 struct s_param
 {
   const char		*container_path; //Relative or absolute path
-  const size_t		container_size; //in Mo
+  size_t		container_size; //in Mo
 };
+
+#define GET_AS(jobj, param, member_name, type) \
+    type = json_object_get_type(val); \
+    switch (type) { \
+        case json_type_string: printf("type: json_type_string, "); \
+printf("value: %sn", json_object_get_string(val)); \
+break; \
 
 #include "proto.h"

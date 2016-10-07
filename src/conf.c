@@ -3,54 +3,78 @@
 #include <string.h>
 #include "crypt.h"
 
+
 static struct {
     char *name;
     size_t shift;
 } strToMember[] = {
         {"container_path", 0},
         {"container_size", 8},
-        {NULL, 0}
+        {NULL,             0}
 };
 
-static char	*read_whole_file(const char *path)
-{
-  FILE *f = fopen(path, "r");
-  if (f == NULL)
-    return (NULL);
-  fseek(f, 0, SEEK_END);
-  long fsize = ftell(f);
-  fseek(f, 0, SEEK_SET);
+static char *read_whole_file(const char *path) {
+    FILE *f = fopen(path, "r");
+    if (f == NULL)
+        return (NULL);
+    fseek(f, 0, SEEK_END);
+    long fsize = ftell(f);
+    fseek(f, 0, SEEK_SET);
 
-  char *string = malloc(fsize + 1);
-  fread(string, fsize, 1, f);
-  fclose(f);
+    char *string = malloc(fsize + 1);
+    fread(string, fsize, 1, f);
+    fclose(f);
 
-  string[fsize] = 0;
-  return (string);
+    string[fsize] = 0;
+    return (string);
 }
 
-t_param		*read_conf(const char *path)
-{
-  t_param	*param = malloc(sizeof(*param));
-  char		*string = read_whole_file(path);
-
-  json_object * jobj = json_tokener_parse(string);
-  if (json_object_get_type(jobj) != json_type_object)
-    {
-      perror("not a valid config file");
+static const char *find_string(const json_object *jobj, t_param *param, const char *member_name) {
+    json_object_object_foreach(jobj, key, val) {
+        int i = 0;
+        while (strToMember[i].name) {
+            if (strcmp(key, member_name) == 0) {
+                return (json_object_get_string(val));
+            }
+            ++i;
+        }
     }
-  enum json_type type;
-  json_object_object_foreach(jobj, key, val) {
-    int i = 0;
+    return NULL;
+}
 
-    while (strToMember[i].name) {
-      if (strcmp(key, strToMember[i].name)) {
-        void *dest = (param + strToMember[i].shift);
-
-      }
-      ++i;
+static long find_int(const json_object *jobj, t_param *param, const char *member_name) {
+    json_object_object_foreach(jobj, key, val) {
+        int i = 0;
+        while (strToMember[i].name) {
+            if (strcmp(key, member_name) == 0) {
+                return (json_object_get_int64(val));
+            }
+            ++i;
+        }
     }
-  }
-  return param;
+    return 0;
+}
+
+t_param *new_conf() {
+    t_param *param = malloc(sizeof(*param));
+    param->container_path = NULL;
+    param->container_size = 0;
+    return param;
+}
+
+t_param *read_conf(const char *path) {
+    t_param *param = new_conf();
+    char *string = read_whole_file(path);
+
+    json_object *jobj = json_tokener_parse(string);
+    if (json_object_get_type(jobj) != json_type_object) {
+        perror("not a valid config file");
+    }
+    const char *container_path = find_string(jobj, param, "container_path");
+    const size_t container_size = (const size_t) find_int(jobj, param, "container_size");
+
+    param->container_path = container_path;
+    param->container_size = container_size;
+    return param;
 }
 

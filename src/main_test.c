@@ -13,7 +13,7 @@ void     test_urandom(){
     int rv = stat("./test", &s);
     assert(rv != -1);
     assert(s.st_size == 512000);
-    fprintf(stdout, "test_urandom PASSED");
+    fprintf(stdout, "test_urandom PASSED\n");
 }
 
 void    test_read_conf()
@@ -21,6 +21,9 @@ void    test_read_conf()
     t_param *pParam = read_conf("./conf.json");
 
     assert(pParam != NULL);
+    assert(pParam->container_size != 0);
+    assert(pParam->container_path != NULL);
+    fprintf(stdout, "test_read_conf PASSED\n");
 }
 
 void test_volume_create()
