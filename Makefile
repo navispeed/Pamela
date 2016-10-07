@@ -1,4 +1,4 @@
-BCC=gcc
+CC=gcc
 
 NAME=mypam.so
 CFLAGS=-fPIC -fno-stack-protector -I include -std=c11 -W -Wall -Wextra
@@ -7,17 +7,14 @@ LDFLAGS=-lcryptsetup -l json
 
 SRC=	src/pam.c	\
 	src/crypt.c	\
-	src/conf.c	
+	src/conf.c
 
 OBJ=$(SRC:.c=.o)
-
-TEST=	$(SRC)		\
-	src/test.c
 
 all:	$(NAME)
 
 $(NAME):$(OBJ)
-	$(CC) -shared -rdynamic $(LDFLAGS) -o $(NAME)
+	$(CC) $(OBJ) -shared -rdynamic $(LDFLAGS) -o $(NAME)
 
 clean:
 	rm -f $(OBJ)

@@ -5,12 +5,19 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #include "crypt.h"
 #include <string.h>
 
 #define BS 4096
 
-int	write_urandom(const char *path, size_t size)
+/**
+ * Destroy specified file
+ * @param path to file
+ * @param size (in bytes)
+ * @return
+ */
+int	        write_urandom(const char *path, size_t size)
 {
     int		fd_in;
     int		fd_out;
@@ -30,6 +37,13 @@ int	write_urandom(const char *path, size_t size)
         size = (size > readed ? size - readed : readed - size);
     }
     return (0);
+}
+
+static void     mkfs_format(const char *path)
+{
+    char        buff[BS];
+    snprintf(buff, BS, "mkfs.ext4 %s", path);
+    system(buff);
 }
 
 static int                    free_crypt(struct crypt_device *cd)
@@ -115,6 +129,18 @@ struct crypt_device           *init_device(const char *path)
   return (cd);
 }
 
+static int       volume_format(struct crypt_device *cd, struct crypt_params_luks1 params)
+{
+    if (crypt_format(cd, CRYPT_LUKS1, "aes", "xts-plain64", NULL, NULL, 256 / 8,
+                     &params) < 0)
+    {
+        fprintf(stderr, "crypt_format() failed\n");
+        perror("FORMAT");
+        return (-1);
+    }
+    return (0);
+}
+
 int	                          volume_create(const char *path, const char *key,
                                             const char *device_name)
 {
@@ -132,6 +158,7 @@ int	                          volume_create(const char *path, const char *key,
   params.hash = "sha1";
   params.data_alignment = 0;
   params.data_device = NULL;
+  volume_format(cd, params);
   if ((r = format(cd, params, key, device_name)) < 0)
     fprintf(stderr, "format() failed on path %s with error %d\n", path, r);
   crypt_free(cd);
