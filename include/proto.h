@@ -1,5 +1,13 @@
+t_param *new_conf();
 t_param *read_conf(const char *path);
 int write_urandom(const char *path,size_t size);
+int crypt_volume(struct crypt_device *cd,const char *key);
+int format(struct crypt_device *cd,struct crypt_params_luks1 params,const char *key,const char *device_name);
+struct crypt_device *init_device(struct crypt_device *cd,const char *path);
+int volume_create(const char *path,const char *key,const char *device_name);
+void test_urandom();
+void test_read_conf();
+void test_volume_create();
 int main(int ac,char **av);
 int main(int argc,char *argv[]);
 int main(int argc,char **argv);
