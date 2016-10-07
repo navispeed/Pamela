@@ -66,6 +66,12 @@ int                           format(struct crypt_device *cd,
       perror("FORMAT");
       return (r);
     }
+  if ((r = crypt_volume(cd, key)) < 0)
+    {
+      fprintf(stderr, "crypt_volume() failed\n");
+      perror("CRYPT");
+      return (r);
+    }
   if ((r = crypt_load(cd, CRYPT_LUKS1, NULL)) < 0)
   {
     fprintf(stderr, "crypt_load() failed\n");
@@ -76,8 +82,10 @@ int                           format(struct crypt_device *cd,
   printf("\tcipher used: %s\n", crypt_get_cipher(cd));
   printf("\tcipher mode: %s\n", crypt_get_cipher_mode(cd));
   printf("\tdevice UUID: %s\n", crypt_get_uuid(cd));
+  printf("\tdevice name: %s\n", crypt_get_device_name(cd));
+  printf("\tKey is: %s with length %lu\n", key, strlen(key));
   if ((r = crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
-                               key, strlen(key), CRYPT_ACTIVATE_READONLY)) < 0)
+                               key, strlen(key), CRYPT_ACTIVATE_NO_UUID)) < 0)
   {
     fprintf(stderr, "crypt_activate_by_passphrase() failed\n");
     perror("ACTIVATE");
