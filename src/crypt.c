@@ -10,6 +10,12 @@
 
 #define BS 4096
 
+/**
+ * Destroy specified file
+ * @param path to file
+ * @param size (in bytes)
+ * @return
+ */
 int	        write_urandom(const char *path, size_t size)
 {
   int		fd_in;
