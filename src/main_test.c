@@ -35,6 +35,6 @@ int   main(int ac, char **av)
 {
     test_urandom();
     test_read_conf();
-  //    volume_create(av[1], av[2]);
+//    volume_create(av[1], av[2], av[3]);
     return (0);
 }
