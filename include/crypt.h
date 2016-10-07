@@ -5,6 +5,7 @@
 #define PAM_SM_PASSWORD
 #define PAM_SM_SESSION
 
+#include <libcryptsetup.h>
 #include <security/pam_appl.h>
 #include <security/pam_modules.h>
 #include <security/pam_ext.h>

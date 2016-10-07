@@ -1,7 +1,6 @@
 #include <stdbool.h>
 #include <sys/mount.h>
 #include <stdio.h>
-#include <libcryptsetup.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
