@@ -12,6 +12,7 @@ int pam_sm_open_session(pam_handle_t *pamh, int flags, int argc, const char **ar
     retval = pam_get_user(pamh, &pUsername, "Username: ");
     retval = pam_get_item(pamh, PAM_AUTHTOK, (const void **) (const void *) &pass);
 
+
     return PAM_SUCCESS;
 }
 
