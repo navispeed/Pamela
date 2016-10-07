@@ -164,3 +164,48 @@ int	                          volume_create(const char *path, const char *key,
   crypt_free(cd);
   return (0);
 }
+
+int                         desactivate_device(const char *device_name)
+{
+  int                       r;
+  struct crypt_device       *cd;
+
+  r = crypt_init_by_name(&cd, device_name);
+  if (r < 0)
+    {
+      printf("crypt_init_by_name() failed for %s.\n", device_name);
+      return (r);
+    }
+  r = crypt_deactivate(cd, device_name);
+  if (r < 0)
+  {
+    printf("crypt_deactivate() failed.\n");
+    crypt_free(cd);
+    return (r);
+  }
+  printf("Device %s is now deactivated.\n", device_name);
+}
+
+int                         volume_open(const char *path, const char *key,
+                                        const char *device_name)
+{
+  int                       r;
+  struct crypt_device       *cd;
+
+  r = crypt_init_by_name(&cd, device_name);
+  if (r < 0)
+    {
+      printf("crypt_init_by_name() failed for %s.\n", device_name);
+      return (r);
+    }
+  if (crypt_status(cd, device_name) == CRYPT_ACTIVE)
+    printf("Device %s is still active.\n", device_name);
+  else
+  {
+    printf("Something failed perhaps, device %s is not active.\n", device_name);
+    crypt_free(cd);
+    return (-1);
+  }
+ crypt_free(cd);
+ return (0);
+}
