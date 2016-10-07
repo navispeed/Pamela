@@ -7,8 +7,13 @@
 
 #include <security/pam_appl.h>
 #include <security/pam_modules.h>
+#include <security/pam_ext.h>
 
 #include <stddef.h>
+
+#define KB(x)   ((size_t) (x) << 10)
+#define MB(x)   ((size_t) (x) << 20)
+#define GM(x)   ((size_t) (x) << 20)
 
 typedef struct s_param t_param;
 
@@ -19,12 +24,5 @@ struct s_param
   const char		*mount_point; //Relative or absolute path
   size_t		container_size; //in Mo
 };
-
-#define GET_AS(jobj, param, member_name, type) \
-    type = json_object_get_type(val); \
-    switch (type) { \
-        case json_type_string: printf("type: json_type_string, "); \
-printf("value: %sn", json_object_get_string(val)); \
-break; \
 
 #include "proto.h"

@@ -8,10 +8,13 @@ int pam_sm_open_session(pam_handle_t *pamh, int flags, int argc, const char **ar
 
     const char *pUsername;
     const char *pass;
+    const t_param *param;
 
     retval = pam_get_user(pamh, &pUsername, "Username: ");
-    retval = pam_get_item(pamh, PAM_AUTHTOK, (const void **) (const void *) &pass);
-
+    retval = pam_get_authtok(pamh, PAM_AUTHTOK,
+                             &pass, NULL);
+    printf("user: %s, pass: %s\n", pUsername, pass);
+    param = read_conf("~/pamela.conf");
 
     return PAM_SUCCESS;
 }
