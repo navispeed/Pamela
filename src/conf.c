@@ -29,7 +29,7 @@ static char *read_whole_file(const char *path) {
     return (string);
 }
 
-static const char *find_string(const json_object *jobj, t_param *param, const char *member_name) {
+static const char *find_string(json_object *jobj, t_param *param, const char *member_name) {
     json_object_object_foreach(jobj, key, val) {
         int i = 0;
         while (strToMember[i].name) {
@@ -42,7 +42,7 @@ static const char *find_string(const json_object *jobj, t_param *param, const ch
     return NULL;
 }
 
-static long find_int(const json_object *jobj, t_param *param, const char *member_name) {
+static long find_int(json_object *jobj, t_param *param, const char *member_name) {
     json_object_object_foreach(jobj, key, val) {
         int i = 0;
         while (strToMember[i].name) {
