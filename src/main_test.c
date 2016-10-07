@@ -36,7 +36,8 @@ int   main(int ac, char **av)
     test_urandom();
 //    test_read_conf();
     volume_create(av[1], av[2], av[3]);
-    volume_open(av[1], av[2], av[3]);
+    volume_status(av[1], av[2], av[3]);
+    //volume_mount(av[3]);
     desactivate_device(av[3]);
     return (0);
 }

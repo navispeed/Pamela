@@ -1,4 +1,5 @@
 #include <stdbool.h>
+#include <sys/mount.h>
 #include <stdio.h>
 #include <libcryptsetup.h>
 #include <unistd.h>
@@ -65,7 +66,7 @@ int                           crypt_volume(struct crypt_device *cd,
   return (0);
 }
 
-int                           format(struct crypt_device *cd,
+int                           volume_format(struct crypt_device *cd,
                                      struct crypt_params_luks1 params,
                                      const char *key,
                                      const char *device_name)
@@ -129,18 +130,6 @@ struct crypt_device           *init_device(const char *path)
   return (cd);
 }
 
-static int       volume_format(struct crypt_device *cd, struct crypt_params_luks1 params)
-{
-    if (crypt_format(cd, CRYPT_LUKS1, "aes", "xts-plain64", NULL, NULL, 256 / 8,
-                     &params) < 0)
-    {
-        fprintf(stderr, "crypt_format() failed\n");
-        perror("FORMAT");
-        return (-1);
-    }
-    return (0);
-}
-
 int	                          volume_create(const char *path, const char *key,
                                             const char *device_name)
 {
@@ -158,8 +147,7 @@ int	                          volume_create(const char *path, const char *key,
   params.hash = "sha1";
   params.data_alignment = 0;
   params.data_device = NULL;
-  volume_format(cd, params);
-  if ((r = format(cd, params, key, device_name)) < 0)
+  if ((r = volume_format(cd, params, key, device_name)) < 0)
     fprintf(stderr, "format() failed on path %s with error %d\n", path, r);
   crypt_free(cd);
   return (0);
@@ -186,7 +174,22 @@ int                         desactivate_device(const char *device_name)
   printf("Device %s is now deactivated.\n", device_name);
 }
 
-int                         volume_open(const char *path, const char *key,
+int                         volume_mount(const char *device_name)
+{
+  char                      *path_to_device;
+
+  sprintf(path_to_device, "%s/%s",crypt_get_dir() , device_name);
+  printf("The path of mount is %s\n", path_to_device);
+  if (mount(path_to_device, "/mnt", "ext4", 0, "mode=0700,uid=65534") < 0)
+  {
+    fprintf(stderr, "mount failed with path %s\n", path_to_device);
+    perror("MOUNT");
+    return (-1);
+  }
+  return(0);
+}
+
+int                         volume_status(const char *path, const char *key,
                                         const char *device_name)
 {
   int                       r;
