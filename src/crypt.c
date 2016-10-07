@@ -135,5 +135,5 @@ int	                          volume_create(const char *path, const char *key,
   if ((r = format(cd, params, key, device_name)) < 0)
     fprintf(stderr, "format() failed on path %s with error %d\n", path, r);
   crypt_free(cd);
-  return (-1);
+  return (0);
 }
