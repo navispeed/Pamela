@@ -136,7 +136,8 @@ int volume_create(const char *path, const char *key,
     return (0);
 }
 
-int desactivate_device(const char *device_name) {
+int desactivate_device(const char *device_name)
+{
     int r;
     struct crypt_device *cd;
 
