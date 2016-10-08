@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/guimauve/rendu/crypto/Pamela
+CMAKE_SOURCE_DIR = /home/greg/ClionProjects/Pamela
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/guimauve/rendu/crypto/Pamela/build
+CMAKE_BINARY_DIR = /home/greg/ClionProjects/Pamela/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/mypam.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/mypam.dir/flags.make
 
 CMakeFiles/mypam.dir/src/crypt.c.o: CMakeFiles/mypam.dir/flags.make
 CMakeFiles/mypam.dir/src/crypt.c.o: ../src/crypt.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/mypam.dir/src/crypt.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/crypt.c.o   -c /home/guimauve/rendu/crypto/Pamela/src/crypt.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/ClionProjects/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/mypam.dir/src/crypt.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/crypt.c.o   -c /home/greg/ClionProjects/Pamela/src/crypt.c
 
 CMakeFiles/mypam.dir/src/crypt.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mypam.dir/src/crypt.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/guimauve/rendu/crypto/Pamela/src/crypt.c > CMakeFiles/mypam.dir/src/crypt.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/greg/ClionProjects/Pamela/src/crypt.c > CMakeFiles/mypam.dir/src/crypt.c.i
 
 CMakeFiles/mypam.dir/src/crypt.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mypam.dir/src/crypt.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/guimauve/rendu/crypto/Pamela/src/crypt.c -o CMakeFiles/mypam.dir/src/crypt.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/greg/ClionProjects/Pamela/src/crypt.c -o CMakeFiles/mypam.dir/src/crypt.c.s
 
 CMakeFiles/mypam.dir/src/crypt.c.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/mypam.dir/src/crypt.c.o.provides.build: CMakeFiles/mypam.dir/src/cryp
 
 CMakeFiles/mypam.dir/src/main_test.c.o: CMakeFiles/mypam.dir/flags.make
 CMakeFiles/mypam.dir/src/main_test.c.o: ../src/main_test.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/mypam.dir/src/main_test.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/main_test.c.o   -c /home/guimauve/rendu/crypto/Pamela/src/main_test.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/ClionProjects/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/mypam.dir/src/main_test.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/main_test.c.o   -c /home/greg/ClionProjects/Pamela/src/main_test.c
 
 CMakeFiles/mypam.dir/src/main_test.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mypam.dir/src/main_test.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/guimauve/rendu/crypto/Pamela/src/main_test.c > CMakeFiles/mypam.dir/src/main_test.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/greg/ClionProjects/Pamela/src/main_test.c > CMakeFiles/mypam.dir/src/main_test.c.i
 
 CMakeFiles/mypam.dir/src/main_test.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mypam.dir/src/main_test.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/guimauve/rendu/crypto/Pamela/src/main_test.c -o CMakeFiles/mypam.dir/src/main_test.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/greg/ClionProjects/Pamela/src/main_test.c -o CMakeFiles/mypam.dir/src/main_test.c.s
 
 CMakeFiles/mypam.dir/src/main_test.c.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/mypam.dir/src/main_test.c.o.provides.build: CMakeFiles/mypam.dir/src/
 
 CMakeFiles/mypam.dir/src/conf.c.o: CMakeFiles/mypam.dir/flags.make
 CMakeFiles/mypam.dir/src/conf.c.o: ../src/conf.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/mypam.dir/src/conf.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/conf.c.o   -c /home/guimauve/rendu/crypto/Pamela/src/conf.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/ClionProjects/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/mypam.dir/src/conf.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/conf.c.o   -c /home/greg/ClionProjects/Pamela/src/conf.c
 
 CMakeFiles/mypam.dir/src/conf.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mypam.dir/src/conf.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/guimauve/rendu/crypto/Pamela/src/conf.c > CMakeFiles/mypam.dir/src/conf.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/greg/ClionProjects/Pamela/src/conf.c > CMakeFiles/mypam.dir/src/conf.c.i
 
 CMakeFiles/mypam.dir/src/conf.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mypam.dir/src/conf.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/guimauve/rendu/crypto/Pamela/src/conf.c -o CMakeFiles/mypam.dir/src/conf.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/greg/ClionProjects/Pamela/src/conf.c -o CMakeFiles/mypam.dir/src/conf.c.s
 
 CMakeFiles/mypam.dir/src/conf.c.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/mypam.dir/src/conf.c.o.provides.build: CMakeFiles/mypam.dir/src/conf.
 
 CMakeFiles/mypam.dir/src/pam.c.o: CMakeFiles/mypam.dir/flags.make
 CMakeFiles/mypam.dir/src/pam.c.o: ../src/pam.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/mypam.dir/src/pam.c.o"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/pam.c.o   -c /home/guimauve/rendu/crypto/Pamela/src/pam.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/ClionProjects/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/mypam.dir/src/pam.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/pam.c.o   -c /home/greg/ClionProjects/Pamela/src/pam.c
 
 CMakeFiles/mypam.dir/src/pam.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mypam.dir/src/pam.c.i"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/guimauve/rendu/crypto/Pamela/src/pam.c > CMakeFiles/mypam.dir/src/pam.c.i
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/greg/ClionProjects/Pamela/src/pam.c > CMakeFiles/mypam.dir/src/pam.c.i
 
 CMakeFiles/mypam.dir/src/pam.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mypam.dir/src/pam.c.s"
-	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/guimauve/rendu/crypto/Pamela/src/pam.c -o CMakeFiles/mypam.dir/src/pam.c.s
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/greg/ClionProjects/Pamela/src/pam.c -o CMakeFiles/mypam.dir/src/pam.c.s
 
 CMakeFiles/mypam.dir/src/pam.c.o.requires:
 
@@ -153,12 +153,37 @@ CMakeFiles/mypam.dir/src/pam.c.o.provides: CMakeFiles/mypam.dir/src/pam.c.o.requ
 CMakeFiles/mypam.dir/src/pam.c.o.provides.build: CMakeFiles/mypam.dir/src/pam.c.o
 
 
+CMakeFiles/mypam.dir/src/files.c.o: CMakeFiles/mypam.dir/flags.make
+CMakeFiles/mypam.dir/src/files.c.o: ../src/files.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/greg/ClionProjects/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/mypam.dir/src/files.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/mypam.dir/src/files.c.o   -c /home/greg/ClionProjects/Pamela/src/files.c
+
+CMakeFiles/mypam.dir/src/files.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/mypam.dir/src/files.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/greg/ClionProjects/Pamela/src/files.c > CMakeFiles/mypam.dir/src/files.c.i
+
+CMakeFiles/mypam.dir/src/files.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/mypam.dir/src/files.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/greg/ClionProjects/Pamela/src/files.c -o CMakeFiles/mypam.dir/src/files.c.s
+
+CMakeFiles/mypam.dir/src/files.c.o.requires:
+
+.PHONY : CMakeFiles/mypam.dir/src/files.c.o.requires
+
+CMakeFiles/mypam.dir/src/files.c.o.provides: CMakeFiles/mypam.dir/src/files.c.o.requires
+	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/files.c.o.provides.build
+.PHONY : CMakeFiles/mypam.dir/src/files.c.o.provides
+
+CMakeFiles/mypam.dir/src/files.c.o.provides.build: CMakeFiles/mypam.dir/src/files.c.o
+
+
 # Object files for target mypam
 mypam_OBJECTS = \
 "CMakeFiles/mypam.dir/src/crypt.c.o" \
 "CMakeFiles/mypam.dir/src/main_test.c.o" \
 "CMakeFiles/mypam.dir/src/conf.c.o" \
-"CMakeFiles/mypam.dir/src/pam.c.o"
+"CMakeFiles/mypam.dir/src/pam.c.o" \
+"CMakeFiles/mypam.dir/src/files.c.o"
 
 # External object files for target mypam
 mypam_EXTERNAL_OBJECTS =
@@ -167,9 +192,10 @@ mypam: CMakeFiles/mypam.dir/src/crypt.c.o
 mypam: CMakeFiles/mypam.dir/src/main_test.c.o
 mypam: CMakeFiles/mypam.dir/src/conf.c.o
 mypam: CMakeFiles/mypam.dir/src/pam.c.o
+mypam: CMakeFiles/mypam.dir/src/files.c.o
 mypam: CMakeFiles/mypam.dir/build.make
 mypam: CMakeFiles/mypam.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable mypam"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/greg/ClionProjects/Pamela/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking C executable mypam"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mypam.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -181,6 +207,7 @@ CMakeFiles/mypam.dir/requires: CMakeFiles/mypam.dir/src/crypt.c.o.requires
 CMakeFiles/mypam.dir/requires: CMakeFiles/mypam.dir/src/main_test.c.o.requires
 CMakeFiles/mypam.dir/requires: CMakeFiles/mypam.dir/src/conf.c.o.requires
 CMakeFiles/mypam.dir/requires: CMakeFiles/mypam.dir/src/pam.c.o.requires
+CMakeFiles/mypam.dir/requires: CMakeFiles/mypam.dir/src/files.c.o.requires
 
 .PHONY : CMakeFiles/mypam.dir/requires
 
@@ -189,6 +216,6 @@ CMakeFiles/mypam.dir/clean:
 .PHONY : CMakeFiles/mypam.dir/clean
 
 CMakeFiles/mypam.dir/depend:
-	cd /home/guimauve/rendu/crypto/Pamela/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/guimauve/rendu/crypto/Pamela /home/guimauve/rendu/crypto/Pamela /home/guimauve/rendu/crypto/Pamela/build /home/guimauve/rendu/crypto/Pamela/build /home/guimauve/rendu/crypto/Pamela/build/CMakeFiles/mypam.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/greg/ClionProjects/Pamela/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/greg/ClionProjects/Pamela /home/greg/ClionProjects/Pamela /home/greg/ClionProjects/Pamela/build /home/greg/ClionProjects/Pamela/build /home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/mypam.dir/depend
 

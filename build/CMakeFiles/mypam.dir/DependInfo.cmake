@@ -4,10 +4,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/home/guimauve/rendu/crypto/Pamela/src/conf.c" "/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles/mypam.dir/src/conf.c.o"
-  "/home/guimauve/rendu/crypto/Pamela/src/crypt.c" "/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles/mypam.dir/src/crypt.c.o"
-  "/home/guimauve/rendu/crypto/Pamela/src/main_test.c" "/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles/mypam.dir/src/main_test.c.o"
-  "/home/guimauve/rendu/crypto/Pamela/src/pam.c" "/home/guimauve/rendu/crypto/Pamela/build/CMakeFiles/mypam.dir/src/pam.c.o"
+  "/home/greg/ClionProjects/Pamela/src/conf.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/conf.c.o"
+  "/home/greg/ClionProjects/Pamela/src/crypt.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/crypt.c.o"
+  "/home/greg/ClionProjects/Pamela/src/files.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/files.c.o"
+  "/home/greg/ClionProjects/Pamela/src/main_test.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/main_test.c.o"
+  "/home/greg/ClionProjects/Pamela/src/pam.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/pam.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

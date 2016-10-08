@@ -7,9 +7,13 @@
 #IncludeRegexTransform: 
 
 ../include/crypt.h
+libcryptsetup.h
+-
 security/pam_appl.h
 -
 security/pam_modules.h
+-
+security/pam_ext.h
 -
 stddef.h
 -
@@ -18,7 +22,7 @@ proto.h
 
 ../include/proto.h
 
-/home/guimauve/rendu/crypto/Pamela/src/conf.c
+/home/greg/ClionProjects/Pamela/src/conf.c
 json/json.h
 -
 stdio.h
@@ -26,14 +30,14 @@ stdio.h
 string.h
 -
 crypt.h
-/home/guimauve/rendu/crypto/Pamela/src/crypt.h
+/home/greg/ClionProjects/Pamela/src/crypt.h
 
-/home/guimauve/rendu/crypto/Pamela/src/crypt.c
+/home/greg/ClionProjects/Pamela/src/crypt.c
 stdbool.h
 -
-stdio.h
+sys/mount.h
 -
-libcryptsetup.h
+stdio.h
 -
 unistd.h
 -
@@ -43,12 +47,22 @@ sys/stat.h
 -
 fcntl.h
 -
+stdlib.h
+-
 crypt.h
-/home/guimauve/rendu/crypto/Pamela/src/crypt.h
+/home/greg/ClionProjects/Pamela/src/crypt.h
 string.h
 -
 
-/home/guimauve/rendu/crypto/Pamela/src/main_test.c
+/home/greg/ClionProjects/Pamela/src/files.c
+stdbool.h
+-
+sys/stat.h
+-
+malloc.h
+-
+
+/home/greg/ClionProjects/Pamela/src/main_test.c
 sys/types.h
 -
 sys/stat.h
@@ -60,9 +74,9 @@ assert.h
 stdio.h
 -
 crypt.h
-/home/guimauve/rendu/crypto/Pamela/src/crypt.h
+/home/greg/ClionProjects/Pamela/src/crypt.h
 
-/home/guimauve/rendu/crypto/Pamela/src/pam.c
+/home/greg/ClionProjects/Pamela/src/pam.c
 stdio.h
 -
 stdlib.h
@@ -70,5 +84,5 @@ stdlib.h
 string.h
 -
 crypt.h
-/home/guimauve/rendu/crypto/Pamela/src/crypt.h
+/home/greg/ClionProjects/Pamela/src/crypt.h
 

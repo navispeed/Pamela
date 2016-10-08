@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/guimauve/rendu/crypto/Pamela
+CMAKE_SOURCE_DIR = /home/greg/ClionProjects/Pamela
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/guimauve/rendu/crypto/Pamela/build
+CMAKE_BINARY_DIR = /home/greg/ClionProjects/Pamela/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/guimauve/rendu/crypto/Pamela/build/CMakeFiles /home/guimauve/rendu/crypto/Pamela/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/greg/ClionProjects/Pamela/build/CMakeFiles /home/greg/ClionProjects/Pamela/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/guimauve/rendu/crypto/Pamela/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/greg/ClionProjects/Pamela/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -177,6 +177,33 @@ src/crypt.c.s:
 	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/crypt.c.s
 .PHONY : src/crypt.c.s
 
+src/files.o: src/files.c.o
+
+.PHONY : src/files.o
+
+# target to build an object file
+src/files.c.o:
+	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/files.c.o
+.PHONY : src/files.c.o
+
+src/files.i: src/files.c.i
+
+.PHONY : src/files.i
+
+# target to preprocess a source file
+src/files.c.i:
+	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/files.c.i
+.PHONY : src/files.c.i
+
+src/files.s: src/files.c.s
+
+.PHONY : src/files.s
+
+# target to generate assembly for a file
+src/files.c.s:
+	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/files.c.s
+.PHONY : src/files.c.s
+
 src/main_test.o: src/main_test.c.o
 
 .PHONY : src/main_test.o
@@ -246,6 +273,9 @@ help:
 	@echo "... src/crypt.o"
 	@echo "... src/crypt.i"
 	@echo "... src/crypt.s"
+	@echo "... src/files.o"
+	@echo "... src/files.i"
+	@echo "... src/files.s"
 	@echo "... src/main_test.o"
 	@echo "... src/main_test.i"
 	@echo "... src/main_test.s"

@@ -6,5 +6,5 @@ C_FLAGS =
 
 C_DEFINES = 
 
-C_INCLUDES = -I/home/guimauve/rendu/crypto/Pamela/include 
+C_INCLUDES = -I/home/greg/ClionProjects/Pamela/include 
 

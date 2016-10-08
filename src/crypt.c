@@ -65,6 +65,9 @@ int volume_format(struct crypt_device *cd,
     struct crypt_active_device cad;
     int r;
 
+    if ((crypt_load(cd, CRYPT_LUKS1, NULL)) == 0) {
+        return (0);
+    }
     if ((r = crypt_format(cd, CRYPT_LUKS1, "aes", "xts-plain64", NULL, NULL,
                           256 / 8, &params)) < 0) {
         fprintf(stderr, "crypt_format() failed\n");
@@ -99,6 +102,7 @@ int volume_format(struct crypt_device *cd,
         perror("ACTIVE");
         return (r);
     }
+    printf("FINISH volume format\n");
     return (0);
 }
 
@@ -160,8 +164,9 @@ int volume_mount(const char *device_name) {
     char path_to_device[BS];
 
     sprintf(path_to_device, "%s/%s", crypt_get_dir(), device_name);
+
     printf("The path of mount is %s\n", path_to_device);
-    if (mount(path_to_device, "/mnt", "ext4", 0, "mode=0700,uid=65534") < 0) {
+    if (mount(path_to_device, "/mnt/", "ext4", 0, "mode=0700,uid=65534") < 0) {
         fprintf(stderr, "mount failed with path %s\n", path_to_device);
         perror("MOUNT");
         return (-1);

@@ -4,16 +4,18 @@
 CMakeFiles/mypam.dir/src/conf.c.o
  ../include/crypt.h
  ../include/proto.h
- /home/guimauve/rendu/crypto/Pamela/src/conf.c
+ /home/greg/ClionProjects/Pamela/src/conf.c
 CMakeFiles/mypam.dir/src/crypt.c.o
  ../include/crypt.h
  ../include/proto.h
- /home/guimauve/rendu/crypto/Pamela/src/crypt.c
+ /home/greg/ClionProjects/Pamela/src/crypt.c
+CMakeFiles/mypam.dir/src/files.c.o
+ /home/greg/ClionProjects/Pamela/src/files.c
 CMakeFiles/mypam.dir/src/main_test.c.o
  ../include/crypt.h
  ../include/proto.h
- /home/guimauve/rendu/crypto/Pamela/src/main_test.c
+ /home/greg/ClionProjects/Pamela/src/main_test.c
 CMakeFiles/mypam.dir/src/pam.c.o
  ../include/crypt.h
  ../include/proto.h
- /home/guimauve/rendu/crypto/Pamela/src/pam.c
+ /home/greg/ClionProjects/Pamela/src/pam.c
