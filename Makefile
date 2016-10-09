@@ -7,7 +7,8 @@ LDFLAGS=-lcryptsetup -l json
 
 SRC=	src/pam.c	\
 	src/crypt.c	\
-	src/conf.c
+	src/conf.c	\
+	src/files.c	\
 
 OBJ=$(SRC:.c=.o)
 
@@ -25,7 +26,7 @@ fclean: clean
 re:	fclean all
 
 dep:
-	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev libjson0 libjson0-dev libpam0g-dev
+	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev libjson0 libjson0-dev libpam0g-dev -y
 
 test:
 	make -f MakefileTest re
