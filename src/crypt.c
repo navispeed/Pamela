@@ -36,9 +36,10 @@ int write_urandom(const char *path, size_t size) {
     return (0);
 }
 
-static void mkfs_format(const char *path) {
+void mkfs_format(const char *path) {
     char buff[BS];
     snprintf(buff, BS, "mkfs.ext4 %s", path);
+    fprintf(stdout, "System(%s)\n", buff);
     system(buff);
 }
 
@@ -66,7 +67,7 @@ int volume_format(struct crypt_device *cd,
     int r;
 
     if ((crypt_load(cd, CRYPT_LUKS1, NULL)) == 0) {
-        return (0);
+        return (1);
     }
     if ((r = crypt_format(cd, CRYPT_LUKS1, "aes", "xts-plain64", NULL, NULL,
                           256 / 8, &params)) < 0) {
@@ -102,6 +103,12 @@ int volume_format(struct crypt_device *cd,
         perror("ACTIVE");
         return (r);
     }
+    char path_to_device[BS];
+
+    sprintf(path_to_device, "%s/%s", crypt_get_dir(), device_name);
+
+    mkfs_format(path_to_device);
+
     printf("FINISH volume format\n");
     return (0);
 }
@@ -137,11 +144,10 @@ int volume_create(const char *path, const char *key,
     if ((r = volume_format(cd, params, key, device_name)) < 0)
         fprintf(stderr, "format() failed on path %s with error %d\n", path, r);
     crypt_free(cd);
-    return (0);
+    return (r);
 }
 
-int desactivate_device(const char *device_name)
-{
+int desactivate_device(const char *device_name) {
     int r;
     struct crypt_device *cd;
 
@@ -160,19 +166,23 @@ int desactivate_device(const char *device_name)
     return 0;
 }
 
-int volume_mount(const char *device_name) {
+int volume_mount(const char *device_name, const char *dest) {
     char path_to_device[BS];
 
-    sprintf(path_to_device, "%s/%s", crypt_get_dir(), device_name);
-
-    printf("The path of mount is %s\n", path_to_device);
-    if (mount(path_to_device, "/mnt/", "ext4", 0, "mode=0700,uid=65534") < 0) {
-        fprintf(stderr, "mount failed with path %s\n", path_to_device);
-        perror("MOUNT");
-        return (-1);
-    }
+    sprintf(path_to_device, "mount %s/%s %s", crypt_get_dir(), device_name, dest);
+    system(path_to_device);
     return (0);
 }
+
+
+int volume_umount(const char *device_name) {
+    char path_to_device[BS];
+
+    sprintf(path_to_device, "umount %s/%s", crypt_get_dir(), device_name);
+    system(path_to_device);
+    return (0);
+}
+
 
 int volume_status(const char *path, const char *key,
                   const char *device_name) {

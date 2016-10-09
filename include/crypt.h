@@ -12,6 +12,8 @@
 
 #include <stddef.h>
 
+#include <stdbool.h>
+
 #define KB(x)   ((size_t) (x) << 10)
 #define MB(x)   ((size_t) (x) << 20)
 #define GM(x)   ((size_t) (x) << 20)

@@ -17,6 +17,8 @@ security/pam_ext.h
 -
 stddef.h
 -
+stdbool.h
+-
 proto.h
 ../include/proto.h
 

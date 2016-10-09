@@ -32,7 +32,7 @@ void test_volume_create() {
     // volume create (path, key, device name)
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_volume_create\033[0m\n");
     r = volume_create("test", "1234", "device_name");
-    if (r == 0)
+    if (r >= 0)
         fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_volume_create PASSED\033[0m\n\n");
     else
         fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_volume_create FAILED\033[0m\n\n");
@@ -47,12 +47,16 @@ void test_volume_create() {
 
     // volume mount (device name)
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_volume_mount\033[0m\n");
-    r = volume_mount("device_name");
+    r = volume_mount("device_name", "/mnt");
     if (r == 0)
         fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_volume_mount PASSED\033[0m\n\n");
     else
         fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_volume_mount FAILED\033[0m\n\n");
 
+    printf("press enter to continue\n");
+    char e[1];
+    read(0, e, 1);
+    volume_umount("device_name");
     desactivate_device("device_name");
 }
 
