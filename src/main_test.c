@@ -45,6 +45,7 @@ void test_volume_create() {
     else
         fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_init_device FAILED\033[0m\n\n");
 
+
     // volume mount (device name)
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_volume_mount\033[0m\n");
     r = volume_mount("device_name", "/mnt");
@@ -58,8 +59,15 @@ void test_volume_create() {
     read(0, e, 1);
     volume_umount("device_name");
     desactivate_device("device_name");
-}
 
+    // crypt file test (path)
+    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_crypt_file_test\033[0m\n");
+    r = crypt_file_test("test");
+    if (r == 0)
+    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_crypt_file_test PASSED\033[0m\n\n");
+    else
+    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_crypt_file_test FAILED\033[0m\n\n");
+}
 
 int main(int ac, char **av) {
     test_urandom();

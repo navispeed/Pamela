@@ -17,6 +17,26 @@
  * @param size (in bytes)
  * @return
  */
+int                   crypt_file_test(const char *path)
+{
+  struct crypt_device *cd;
+
+  if (crypt_init(&cd, path) < 0)
+    {
+      perror("FILE TEST INIT");
+      return (-1);
+    }
+  if ((crypt_load(cd, CRYPT_LUKS1, NULL)) < 0) {
+        perror("FILE TEST LOAD");
+        return (-1);
+  }
+  else
+  {
+    fprintf(stdout, "File is already formated\n");
+    return (0);
+  }
+}
+
 int write_urandom(const char *path, size_t size) {
     int fd_in;
     int fd_out;
