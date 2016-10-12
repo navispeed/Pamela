@@ -10,6 +10,8 @@ CMakeFiles/mypam.dir/src/crypt.c.o
  ../include/proto.h
  /home/greg/ClionProjects/Pamela/src/crypt.c
 CMakeFiles/mypam.dir/src/files.c.o
+ ../include/crypt.h
+ ../include/proto.h
  /home/greg/ClionProjects/Pamela/src/files.c
 CMakeFiles/mypam.dir/src/main_test.c.o
  ../include/crypt.h

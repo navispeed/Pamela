@@ -1,5 +1,6 @@
 t_param *new_conf();
 t_param *read_conf(const char *path);
+int crypt_activate_device(const char *path,const char *key,const char *device_name);
 int crypt_file_test(const char *path);
 int write_urandom(const char *path,size_t size);
 void mkfs_format(const char *path);

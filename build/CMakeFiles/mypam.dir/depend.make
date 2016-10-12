@@ -9,6 +9,8 @@ CMakeFiles/mypam.dir/src/crypt.c.o: ../include/crypt.h
 CMakeFiles/mypam.dir/src/crypt.c.o: ../include/proto.h
 CMakeFiles/mypam.dir/src/crypt.c.o: ../src/crypt.c
 
+CMakeFiles/mypam.dir/src/files.c.o: ../include/crypt.h
+CMakeFiles/mypam.dir/src/files.c.o: ../include/proto.h
 CMakeFiles/mypam.dir/src/files.c.o: ../src/files.c
 
 CMakeFiles/mypam.dir/src/main_test.c.o: ../include/crypt.h

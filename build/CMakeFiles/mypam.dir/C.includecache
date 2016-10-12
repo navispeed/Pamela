@@ -17,7 +17,15 @@ security/pam_ext.h
 -
 stddef.h
 -
+stdio.h
+-
 stdbool.h
+-
+malloc.h
+-
+stdlib.h
+-
+pwd.h
 -
 proto.h
 ../include/proto.h
@@ -35,15 +43,9 @@ crypt.h
 /home/greg/ClionProjects/Pamela/src/crypt.h
 
 /home/greg/ClionProjects/Pamela/src/crypt.c
-stdbool.h
--
-sys/mount.h
--
 stdio.h
 -
 unistd.h
--
-sys/types.h
 -
 sys/stat.h
 -
@@ -61,7 +63,9 @@ stdbool.h
 -
 sys/stat.h
 -
-malloc.h
+unistd.h
+-
+crypt.h
 -
 
 /home/greg/ClionProjects/Pamela/src/main_test.c
@@ -77,6 +81,8 @@ stdio.h
 -
 crypt.h
 /home/greg/ClionProjects/Pamela/src/crypt.h
+string.h
+-
 
 /home/greg/ClionProjects/Pamela/src/pam.c
 stdio.h
@@ -84,6 +90,10 @@ stdio.h
 stdlib.h
 -
 string.h
+-
+unistd.h
+-
+sys/stat.h
 -
 crypt.h
 /home/greg/ClionProjects/Pamela/src/crypt.h

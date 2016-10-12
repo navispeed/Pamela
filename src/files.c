@@ -15,21 +15,6 @@ static struct stat *get_file(const char *path)
     return s;
 }
 
-bool file_exist(const char *path)
-{
-
-}
-
-bool folder_exist(const char *path)
-{
-
-}
-
-bool create_folder(const char *path)
-{
-
-}
-
 const char *get_user_home(const char *username)
 {
     const char    *homedir;

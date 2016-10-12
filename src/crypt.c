@@ -118,7 +118,6 @@ int volume_format(struct crypt_device *cd,
                   const char *key,
                   const char *device_name,
                   const char *path) {
-    struct crypt_active_device cad;
     int r;
 
     if ((crypt_load(cd, CRYPT_LUKS1, NULL)) == 0) {
@@ -231,8 +230,6 @@ int desactivate_device(const char *device_name) {
 
 int volume_mount(const char *device_name, const char *dest) {
     char path_to_device[BS];
-
-    mkdir(dest, 777);
 
     sprintf(path_to_device, "mount %s/%s %s", crypt_get_dir(), device_name, dest);
     system(path_to_device);
