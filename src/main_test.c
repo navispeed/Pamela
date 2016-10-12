@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include "crypt.h"
+#include <string.h>
 
 void test_urandom() {
     struct stat s = {0};
@@ -37,6 +38,8 @@ void test_volume_create() {
     else
         fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_volume_create FAILED\033[0m\n\n");
 
+    assert(r >= 0);
+
     // init device (path)
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_init_device\033[0m\n");
     cd = init_device("test");
@@ -45,6 +48,7 @@ void test_volume_create() {
     else
         fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_init_device FAILED\033[0m\n\n");
 
+    assert(r >= 0);
 
     // volume mount (device name)
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_volume_mount\033[0m\n");
@@ -54,9 +58,8 @@ void test_volume_create() {
     else
         fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_volume_mount FAILED\033[0m\n\n");
 
-    printf("press enter to continue\n");
-    char e[1];
-    read(0, e, 1);
+    assert(r >= 0);
+
     volume_umount("device_name");
     desactivate_device("device_name");
 
@@ -69,10 +72,27 @@ void test_volume_create() {
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_crypt_file_test FAILED\033[0m\n\n");
 }
 
+int test_get_user_home()
+{
+    unsetenv("HOME");
+    assert(strcmp("/root", get_user_home("root")) == 0);
+    assert(strcmp("/home/greg", get_user_home("greg")) == 0);
+    fprintf(stdout, "test_get_user_home PASSED\n");
+    return 0;
+}
+
+int test_replace_by_home()
+{
+    assert(strcmp("/root/conf.json", get_real_path("~/conf.json", "root")) == 0);
+    assert(strcmp("/home/greg/conf.json", get_real_path("~/conf.json", "greg")) == 0);
+}
+
+
 int main(int ac, char **av) {
     test_urandom();
-//    test_read_conf();
+    test_get_user_home();
+    test_replace_by_home();
+    test_read_conf();
     test_volume_create();
-
     return (0);
 }

@@ -1,5 +1,6 @@
 {
     "container_path": "~/container",
     "container_size": 512, //In Mo
-    "mount_point": "~/encrypted/"
+    "mount_point": "~/encrypted/",
+    "device_name": "pamela"
 }

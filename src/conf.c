@@ -60,6 +60,7 @@ t_param *new_conf() {
     param->container_path = "~/encryptedData";
     param->container_size = MB(512);
     param->mount_point = "~/mountedContainer/";
+    param->device_name = "pamela";
     return param;
 }
 
@@ -68,6 +69,7 @@ t_param *read_conf(const char *path) {
     char *string = read_whole_file(path);
 
     if (string == NULL) {
+        fprintf(stderr, "no config file provided at %s, using default values\n", path);
         return param;
     }
     json_object *jobj = json_tokener_parse(string);
@@ -76,11 +78,13 @@ t_param *read_conf(const char *path) {
     }
     const char *container_path = find_string(jobj, "container_path");
     const char *mount_point = find_string(jobj, "mount_point");
+    const char *device_name = find_string(jobj, "device_name");
     const size_t container_size = (const size_t) find_int(jobj, "container_size");
 
     param->container_path = container_path;
     param->container_size = MB(container_size);
     param->mount_point = mount_point;
+    param->device_name = device_name;
     return param;
 }
 

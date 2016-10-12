@@ -1,8 +1,5 @@
-#include <stdbool.h>
-#include <sys/mount.h>
 #include <stdio.h>
 #include <unistd.h>
-#include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
@@ -11,12 +8,6 @@
 
 #define BS 4096
 
-/**
- * Destroy specified file
- * @param path to file
- * @param size (in bytes)
- * @return
- */
 int                   crypt_file_test(const char *path)
 {
   struct crypt_device *cd;
@@ -157,14 +148,20 @@ int volume_create(const char *path, const char *key,
         return (1);
     }
     cd = init_device(path);
+    if (cd == NULL) {
+        return -1;
+    }
+    printf("cd : %p\n", cd);
     printf("Context is attached to the block %s\n", crypt_get_device_name(cd));
     params.hash = "sha1";
     params.data_alignment = 0;
     params.data_device = NULL;
-    if ((r = volume_format(cd, params, key, device_name)) < 0)
+    if ((r = volume_format(cd, params, key, device_name)) < 0) {
         fprintf(stderr, "format() failed on path %s with error %d\n", path, r);
+        return -1;
+    }
     crypt_free(cd);
-    return (r);
+    return (0);
 }
 
 int desactivate_device(const char *device_name) {
@@ -188,6 +185,8 @@ int desactivate_device(const char *device_name) {
 
 int volume_mount(const char *device_name, const char *dest) {
     char path_to_device[BS];
+
+    mkdir(dest, 777);
 
     sprintf(path_to_device, "mount %s/%s %s", crypt_get_dir(), device_name, dest);
     system(path_to_device);
