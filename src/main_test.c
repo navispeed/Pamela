@@ -70,6 +70,16 @@ void test_volume_create() {
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_crypt_file_test PASSED\033[0m\n\n");
     else
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_crypt_file_test FAILED\033[0m\n\n");
+
+    //crypt activate device (path, key, device_name)
+    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_crypt_activate_device\033[0m\n");
+    r = crypt_activate_device("test", "1234", "device_name");
+    if (r == 0)
+    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_crypt_activate_device PASSED\033[0m\n\n");
+    else
+    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_crypt_activate_device FAILED\033[0m\n\n");
+
+    desactivate_device("device_name");
 }
 
 int test_get_user_home()
