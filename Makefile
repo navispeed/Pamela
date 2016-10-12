@@ -3,7 +3,7 @@ CC=gcc
 NAME=mypam.so
 CFLAGS=-fPIC -fno-stack-protector -I include -std=c11 -W -Wall -Wextra
 
-LDFLAGS=-lcryptsetup -l json
+LDFLAGS=-lcryptsetup -l json -lusb
 
 SRC=	src/pam.c	\
 	src/crypt.c	\
@@ -26,10 +26,11 @@ fclean: clean
 re:	fclean all
 
 dep:
-	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev libjson0 libjson0-dev libpam0g-dev -y
+	apt install uuid-dev libdevmapper-dev libpopt-dev libgcrypt20 libgcrypt20-dev libcryptsetup-dev libjson0 libjson0-dev libpam0g-dev libusb-dev -y
 
 test:
 	make -f MakefileTest re
 
 install:all
-	sudo ld -x --shared -o /lib/security/mypam.so mypam.o
+	sudo cp $(NAME) /lib/*/security/
+	cp conf.json ~/pamela.conf
