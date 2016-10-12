@@ -97,11 +97,10 @@ int test_replace_by_home()
     assert(strcmp("/home/greg/conf.json", get_real_path("~/conf.json", "greg")) == 0);
 }
 
-
 int main(int ac, char **av) {
     test_urandom();
-    test_get_user_home();
-    test_replace_by_home();
+    //test_get_user_home();
+    //test_replace_by_home();
     test_read_conf();
     test_volume_create();
     return (0);

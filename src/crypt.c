@@ -25,11 +25,7 @@ int                   crypt_activate_device(const char *path, const char *key,
       perror("LOAD");
       return (r);
   }
-  printf("LUKS device %s/%s gonna be activate.\n", crypt_get_dir(), device_name);
-  printf("\tcipher used: %s\n", crypt_get_cipher(cd));
-  printf("\tcipher mode: %s\n", crypt_get_cipher_mode(cd));
-  printf("\tdevice UUID: %s\n", crypt_get_uuid(cd));
-  printf("\tdevice name: %s\n", crypt_get_device_name(cd));
+  dump_device(device_name, cd);
   printf("\tKey is: %s with length %lu\n", key, strlen(key));
   if ((r = crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
                                         key, strlen(key), CRYPT_ACTIVATE_NO_UUID)) < 0) {
@@ -43,6 +39,7 @@ int                   crypt_activate_device(const char *path, const char *key,
       perror("ACTIVE");
       return (r);
   }
+  return (0);
 }
 
 int                   crypt_file_test(const char *path)
@@ -119,7 +116,8 @@ void dump_device(const char *device_name, struct crypt_device *cd)
 int volume_format(struct crypt_device *cd,
                   struct crypt_params_luks1 params,
                   const char *key,
-                  const char *device_name) {
+                  const char *device_name,
+                  const char *path) {
     struct crypt_active_device cad;
     int r;
 
@@ -140,7 +138,7 @@ int volume_format(struct crypt_device *cd,
         return (r);
     }
 
-    crypt_active_device(path, key, device_name);
+    crypt_activate_device(path, key, device_name);
 
     // if ((r = crypt_load(cd, CRYPT_LUKS1, NULL)) < 0) {
     //     fprintf(stderr, "crypt_load() failed\n");
@@ -204,7 +202,7 @@ int volume_create(const char *path, const char *key,
     params.hash = "sha1";
     params.data_alignment = 0;
     params.data_device = NULL;
-    if ((r = volume_format(cd, params, key, device_name)) < 0) {
+    if ((r = volume_format(cd, params, key, device_name, path)) < 0) {
         fprintf(stderr, "format() failed on path %s with error %d\n", path, r);
         return -1;
     }
