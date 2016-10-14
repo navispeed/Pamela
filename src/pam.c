@@ -21,6 +21,9 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     //TODO change this
     retval = pam_get_authtok(pamh, PAM_AUTHTOK,
                              &pass, "pamela>");
+    if (retval != PAM_SUCCESS) {
+        return PAM_IGNORE;
+    }
     printf("user: %s, pass: %s\n", pUsername, pass);
     param = read_conf(get_real_path("~/pamela.conf", pUsername));
     param->container_path = get_real_path(param->container_path, pUsername);
@@ -59,6 +62,9 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
 
 int pam_sm_close_session(pam_handle_t __attribute__((unused)) *pamh, int __attribute__((unused)) flags, int __attribute__((unused)) argc,
                          const char __attribute__((unused)) **argv) {
+    if (param == NULL) {
+        return PAM_IGNORE;
+    }
     volume_umount(param->device_name);
     desactivate_device(param->device_name);
     return PAM_SUCCESS;
