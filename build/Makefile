@@ -258,6 +258,33 @@ src/pam.c.s:
 	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/pam.c.s
 .PHONY : src/pam.c.s
 
+src/usb.o: src/usb.c.o
+
+.PHONY : src/usb.o
+
+# target to build an object file
+src/usb.c.o:
+	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/usb.c.o
+.PHONY : src/usb.c.o
+
+src/usb.i: src/usb.c.i
+
+.PHONY : src/usb.i
+
+# target to preprocess a source file
+src/usb.c.i:
+	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/usb.c.i
+.PHONY : src/usb.c.i
+
+src/usb.s: src/usb.c.s
+
+.PHONY : src/usb.s
+
+# target to generate assembly for a file
+src/usb.c.s:
+	$(MAKE) -f CMakeFiles/mypam.dir/build.make CMakeFiles/mypam.dir/src/usb.c.s
+.PHONY : src/usb.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -282,6 +309,9 @@ help:
 	@echo "... src/pam.o"
 	@echo "... src/pam.i"
 	@echo "... src/pam.s"
+	@echo "... src/usb.o"
+	@echo "... src/usb.i"
+	@echo "... src/usb.s"
 .PHONY : help
 
 

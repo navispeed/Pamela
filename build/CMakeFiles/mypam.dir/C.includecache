@@ -98,3 +98,11 @@ sys/stat.h
 crypt.h
 /home/greg/ClionProjects/Pamela/src/crypt.h
 
+/home/greg/ClionProjects/Pamela/src/usb.c
+usb.h
+-
+string.h
+-
+stdio.h
+-
+

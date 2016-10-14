@@ -1,1 +1,1 @@
-/usr/bin/cc     CMakeFiles/mypam.dir/src/crypt.c.o CMakeFiles/mypam.dir/src/main_test.c.o CMakeFiles/mypam.dir/src/conf.c.o CMakeFiles/mypam.dir/src/pam.c.o CMakeFiles/mypam.dir/src/files.c.o  -o mypam -rdynamic -lcryptsetup -ljson -lpam -lpam_misc 
+/usr/bin/cc     CMakeFiles/mypam.dir/src/crypt.c.o CMakeFiles/mypam.dir/src/main_test.c.o CMakeFiles/mypam.dir/src/conf.c.o CMakeFiles/mypam.dir/src/pam.c.o CMakeFiles/mypam.dir/src/files.c.o CMakeFiles/mypam.dir/src/usb.c.o  -o mypam -rdynamic -lcryptsetup -ljson -lpam -lpam_misc -lusb 

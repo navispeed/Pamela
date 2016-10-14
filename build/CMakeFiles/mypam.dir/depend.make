@@ -21,3 +21,5 @@ CMakeFiles/mypam.dir/src/pam.c.o: ../include/crypt.h
 CMakeFiles/mypam.dir/src/pam.c.o: ../include/proto.h
 CMakeFiles/mypam.dir/src/pam.c.o: ../src/pam.c
 
+CMakeFiles/mypam.dir/src/usb.c.o: ../src/usb.c
+

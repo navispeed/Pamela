@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/greg/ClionProjects/Pamela/src/files.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/files.c.o"
   "/home/greg/ClionProjects/Pamela/src/main_test.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/main_test.c.o"
   "/home/greg/ClionProjects/Pamela/src/pam.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/pam.c.o"
+  "/home/greg/ClionProjects/Pamela/src/usb.c" "/home/greg/ClionProjects/Pamela/build/CMakeFiles/mypam.dir/src/usb.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

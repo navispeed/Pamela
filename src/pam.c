@@ -26,10 +26,6 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     param->container_path = get_real_path(param->container_path, pUsername);
     param->mount_point = get_real_path(param->mount_point, pUsername);
 
-//    printf("param : %s\n%s\n%s\n%lu\n", param->mount_point, param->device_name, param->container_path, param->container_size);
-
-    printf("access : %d\n", access(param->container_path, F_OK) == 0);
-
     if (crypt_file_test(param->container_path) != 0) {
         printf("New volume\n");
         write_urandom(param->container_path, param->container_size);

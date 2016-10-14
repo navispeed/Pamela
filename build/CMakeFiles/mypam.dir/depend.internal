@@ -21,3 +21,5 @@ CMakeFiles/mypam.dir/src/pam.c.o
  ../include/crypt.h
  ../include/proto.h
  /home/greg/ClionProjects/Pamela/src/pam.c
+CMakeFiles/mypam.dir/src/usb.c.o
+ /home/greg/ClionProjects/Pamela/src/usb.c

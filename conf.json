@@ -2,5 +2,6 @@
     "container_path": "~/container",
     "container_size": 512, //In Mo
     "mount_point": "~/encrypted/",
-    "device_name": "pamela"
+    "device_name": "pamela",
+    "usb_decode": null //Use script to generate new conf file
 }

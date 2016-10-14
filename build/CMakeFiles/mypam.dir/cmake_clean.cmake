@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/mypam.dir/src/conf.c.o"
   "CMakeFiles/mypam.dir/src/pam.c.o"
   "CMakeFiles/mypam.dir/src/files.c.o"
+  "CMakeFiles/mypam.dir/src/usb.c.o"
   "mypam.pdb"
   "mypam"
 )
