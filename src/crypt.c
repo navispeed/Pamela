@@ -134,26 +134,6 @@ int volume_format(struct crypt_device *cd,
 
     crypt_activate_device(path, key, device_name);
 
-    // if ((r = crypt_load(cd, CRYPT_LUKS1, NULL)) < 0) {
-    //     fprintf(stderr, "crypt_load() failed\n");
-    //     perror("LOAD");
-    //     return (r);
-    // }
-    //
-    // dump_device(device_name, cd);
-    // if ((r = crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
-    //                                       key, strlen(key), CRYPT_ACTIVATE_NO_UUID)) < 0) {
-    //     fprintf(stderr, "crypt_activate_by_passphrase() failed\n");
-    //     perror("ACTIVATE");
-    //     return (r);
-    // }
-    // printf("LUKS device %s/%s is active.\n", crypt_get_dir(), device_name);
-    //
-    // if ((r = crypt_get_active_device(cd, device_name, &cad)) < 0) {
-    //     fprintf(stderr, "crypt_get_active_device() failed\n");
-    //     perror("ACTIVE");
-    //     return (r);
-    // }
     char path_to_device[BS];
 
     sprintf(path_to_device, "%s/%s", crypt_get_dir(), device_name);
@@ -168,7 +148,7 @@ struct crypt_device *init_device(const char *path) {
     struct crypt_device *cd;
     int r;
 
-    if ((r = crypt_init(&cd, path)) < 0) //TODO : migrate to function init()
+    if ((r = crypt_init(&cd, path)) < 0)
     {
         fprintf(stderr, "crypt_init failed on path %s with error %d\n", path, r);
         perror("INIT");
