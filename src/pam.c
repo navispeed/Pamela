@@ -22,12 +22,10 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
     }
 
     size_t i = strlen(pass);
-    printf("pass: %s, len: %d\n", pass, (int) i);
 
     char *data = malloc(i + 1);
 
     strcpy(data, pass);
-    printf("data: %s\n", data);
 
     retval = pam_set_data(pamh, MODULE_NAME, data, NULL);
     if (retval != PAM_SUCCESS) {
@@ -35,14 +33,8 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
         return PAM_IGNORE;
     }
 
-    printf("data: %s\n", data);
     const void *tmp = NULL;
     pam_get_data(pamh, MODULE_NAME, &tmp);
-    printf("data: %s\n", data);
-
-
-    printf("PAM data(%s): %p, tmp: %p\n", data, (void *)data, (void *) tmp);
-    printf("pass: <%s>\n", (char *)tmp);
     return PAM_IGNORE;
 }
 
@@ -117,15 +109,7 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     if (retval == PAM_ABORT) {
         return PAM_IGNORE;
     }
-
-    //TODO change this
-
     pam_get_data(pamh, MODULE_NAME, (const void **) &pass);
-    printf("TOTOTOTOTOTOTOTOTO pass: %s\n", pass);
-
-//    retval = pam_get_authtok(pamh, PAM_AUTHTOK, &pass, "pamela>");
-
-//    retval = pam_get_item(pamh, PAM_AUTHTOK, (const void**)&pass);
     if (!pass) {
         pam_syslog(pamh, LOG_NOTICE, "%s: Couldn't get password (it is empty)", "");
         //Asking for the password ourselves
@@ -137,7 +121,6 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
             return PAM_IGNORE;
         }
     }
-    printf("pass: <%s>\n", pass);
     if (!pass) {
         fprintf(stderr, "aborted due to null pass\n");
         return PAM_IGNORE;
@@ -164,12 +147,10 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     param->container_path = get_real_path(param->container_path, pUsername);
     param->mount_point = get_real_path(param->mount_point, pUsername);
 
-//    printf("param : %s\n%s\n%s\n%lu\n", param->mount_point, param->device_name, param->container_path, param->container_size);
-
     printf("access : %d\n", access(param->container_path, F_OK) == 0);
 
     if (crypt_file_test(param->container_path) != 0) {
-        printf("New volume\n");
+        PUT_DBG(printf("New volume\n"));
         write_urandom(param->container_path, param->container_size);
         volume_create(param->container_path, pass, param->device_name);
     } else {
@@ -177,11 +158,9 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     }
 
     init_device(param->container_path);
-    printf("init device OK\n");
+    PUT_DBG(printf("Init device ok\n"));
 
     mkdir(param->mount_point, 555);
-
-    // volume mount (device name)
     volume_mount(param->device_name, param->mount_point);
 
     struct passwd *owner = getpwnam(pUsername);

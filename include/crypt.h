@@ -5,6 +5,11 @@
 #define PAM_SM_AUTH
 #define PAM_SM_ACCOUNT
 
+#ifdef DBG
+#define PUT_DBG(code) code
+#else
+#define PUT_DBG(code)
+#endif
 
 #include <libcryptsetup.h>
 #include <security/pam_appl.h>
