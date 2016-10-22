@@ -15,7 +15,6 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
     const char *pass = NULL;
 
     retval = pam_get_item(pamh, PAM_AUTHTOK, (const void **)&pass);
-    printf("pam_sm_authenticat %s\n", pass);
 
     if (retval != PAM_SUCCESS) {
         return PAM_IGNORE;
@@ -44,7 +43,6 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     const char *pass = NULL;
     const char *pUsername;
 
-    printf("pam_sm_open_session\n");
     for (int i = 0; i < argc; ++i) {
         printf("argv[%d]: %s\n", i, argv[i]);
     }
@@ -90,8 +88,6 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     param = read_conf(get_real_path("~/pamela.conf", pUsername));
     param->container_path = get_real_path(param->container_path, pUsername);
     param->mount_point = get_real_path(param->mount_point, pUsername);
-
-    printf("access : %d\n", access(param->container_path, F_OK) == 0);
 
     if (crypt_file_test(param->container_path) != 0) {
         PUT_DBG(printf("New volume\n"));
