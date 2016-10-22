@@ -28,13 +28,13 @@ int crypt_activate_device(const char *path, const char *key,
     if ((r = crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
                                           key, strlen(key), CRYPT_ACTIVATE_NO_UUID)) < 0) {
         fprintf(stderr, "crypt_activate_by_passphrase() failed\n");
-        perror("ACTIVATE");
+        PUT_DBG(perror("ACTIVATE"));
         return (r);
     }
     printf("LUKS device %s/%s is active.\n", crypt_get_dir(), device_name);
     if ((r = crypt_get_active_device(cd, device_name, &cad)) < 0) {
         fprintf(stderr, "crypt_get_active_device() failed\n");
-        perror("ACTIVE");
+        PUT_DBG(perror("ACTIVE"));
         return (r);
     }
     return (0);
@@ -51,7 +51,7 @@ int crypt_file_test(const char *path) {
         perror("FILE TEST LOAD");
         return (-1);
     } else {
-        fprintf(stdout, "File is already formated\n");
+        PUT_DBG(fprintf(stdout, "File is already formated\n"));
         return (0);
     }
 }
@@ -82,7 +82,7 @@ void mkfs_format(const char *path) {
     system(buff);
 }
 
-static int free_crypt(struct crypt_device *cd) {
+static __attribute__((unused)) int free_crypt(struct crypt_device *cd) {
     crypt_free(cd);
     return (0);
 }
@@ -98,7 +98,7 @@ int crypt_volume(struct crypt_device *cd,
     return (0);
 }
 
-void dump_device(const char *device_name, struct crypt_device *cd) {
+void dump_device(const char __attribute__((unused)) *device_name, struct crypt_device __attribute__((unused)) *cd) {
     PUT_DBG(
             printf("LUKS device %s/%s gonna be activate.\n", crypt_get_dir(), device_name);
             printf("\tcipher used: %s\n", crypt_get_cipher(cd));
@@ -221,7 +221,7 @@ int volume_umount(const char *device_name) {
 }
 
 
-int volume_status(const char *path, const char *key,
+int volume_status(const char __attribute__((unused)) *path, const char __attribute__((unused)) *key,
                   const char *device_name) {
     int r;
     struct crypt_device *cd;
