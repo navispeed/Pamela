@@ -8,58 +8,52 @@
 
 #define BS 4096
 
-int                   crypt_activate_device(const char *path, const char *key,
-                                            const char *device_name)
-{
-  struct crypt_device         *cd;
-  struct crypt_active_device  cad;
-  int                         r;
+int crypt_activate_device(const char *path, const char *key,
+                          const char *device_name) {
+    struct crypt_device *cd;
+    struct crypt_active_device cad;
+    int r;
 
-  if (crypt_init(&cd, path) < 0)
-  {
-    perror("ACTIVATE INIT");
-    return (-1);
-  }
-  if ((r = crypt_load(cd, CRYPT_LUKS1, NULL)) < 0) {
-      fprintf(stderr, "crypt_load() failed\n");
-      perror("LOAD");
-      return (r);
-  }
-  dump_device(device_name, cd);
-  printf("\tKey is: %s with length %lu\n", key, strlen(key));
-  if ((r = crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
-                                        key, strlen(key), CRYPT_ACTIVATE_NO_UUID)) < 0) {
-      fprintf(stderr, "crypt_activate_by_passphrase() failed\n");
-      perror("ACTIVATE");
-      return (r);
-  }
-  printf("LUKS device %s/%s is active.\n", crypt_get_dir(), device_name);
-  if ((r = crypt_get_active_device(cd, device_name, &cad)) < 0) {
-      fprintf(stderr, "crypt_get_active_device() failed\n");
-      perror("ACTIVE");
-      return (r);
-  }
-  return (0);
+    if (crypt_init(&cd, path) < 0) {
+        perror("ACTIVATE INIT");
+        return (-1);
+    }
+    if ((r = crypt_load(cd, CRYPT_LUKS1, NULL)) < 0) {
+        fprintf(stderr, "crypt_load() failed\n");
+        perror("LOAD");
+        return (r);
+    }
+    dump_device(device_name, cd);
+    PUT_DBG(printf("\tKey is: %s with length %lu\n", key, strlen(key)));
+    if ((r = crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
+                                          key, strlen(key), CRYPT_ACTIVATE_NO_UUID)) < 0) {
+        fprintf(stderr, "crypt_activate_by_passphrase() failed\n");
+        PUT_DBG(perror("ACTIVATE"));
+        return (r);
+    }
+    printf("LUKS device %s/%s is active.\n", crypt_get_dir(), device_name);
+    if ((r = crypt_get_active_device(cd, device_name, &cad)) < 0) {
+        fprintf(stderr, "crypt_get_active_device() failed\n");
+        PUT_DBG(perror("ACTIVE"));
+        return (r);
+    }
+    return (0);
 }
 
-int                   crypt_file_test(const char *path)
-{
-  struct crypt_device *cd;
+int crypt_file_test(const char *path) {
+    struct crypt_device *cd;
 
-  if (crypt_init(&cd, path) < 0)
-    {
-      perror("FILE TEST INIT");
-      return (-1);
+    if (crypt_init(&cd, path) < 0) {
+        perror("FILE TEST INIT");
+        return (-1);
     }
-  if ((crypt_load(cd, CRYPT_LUKS1, NULL)) < 0) {
+    if ((crypt_load(cd, CRYPT_LUKS1, NULL)) < 0) {
         perror("FILE TEST LOAD");
         return (-1);
-  }
-  else
-  {
-    fprintf(stdout, "File is already formated\n");
-    return (0);
-  }
+    } else {
+        PUT_DBG(fprintf(stdout, "File is already formated\n"));
+        return (0);
+    }
 }
 
 int write_urandom(const char *path, size_t size) {
@@ -88,7 +82,7 @@ void mkfs_format(const char *path) {
     system(buff);
 }
 
-static int free_crypt(struct crypt_device *cd) {
+static __attribute__((unused)) int free_crypt(struct crypt_device *cd) {
     crypt_free(cd);
     return (0);
 }
@@ -104,13 +98,14 @@ int crypt_volume(struct crypt_device *cd,
     return (0);
 }
 
-void dump_device(const char *device_name, struct crypt_device *cd)
-{
-  printf("LUKS device %s/%s gonna be activate.\n", crypt_get_dir(), device_name);
-  printf("\tcipher used: %s\n", crypt_get_cipher(cd));
-  printf("\tcipher mode: %s\n", crypt_get_cipher_mode(cd));
-  printf("\tdevice UUID: %s\n", crypt_get_uuid(cd));
-  printf("\tdevice name: %s\n", crypt_get_device_name(cd));
+void dump_device(const char __attribute__((unused)) *device_name, struct crypt_device __attribute__((unused)) *cd) {
+    PUT_DBG(
+            printf("LUKS device %s/%s gonna be activate.\n", crypt_get_dir(), device_name);
+            printf("\tcipher used: %s\n", crypt_get_cipher(cd));
+            printf("\tcipher mode: %s\n", crypt_get_cipher_mode(cd));
+            printf("\tdevice UUID: %s\n", crypt_get_uuid(cd));
+            printf("\tdevice name: %s\n", crypt_get_device_name(cd));
+    )
 }
 
 int volume_format(struct crypt_device *cd,
@@ -139,26 +134,6 @@ int volume_format(struct crypt_device *cd,
 
     crypt_activate_device(path, key, device_name);
 
-    // if ((r = crypt_load(cd, CRYPT_LUKS1, NULL)) < 0) {
-    //     fprintf(stderr, "crypt_load() failed\n");
-    //     perror("LOAD");
-    //     return (r);
-    // }
-    //
-    // dump_device(device_name, cd);
-    // if ((r = crypt_activate_by_passphrase(cd, device_name, CRYPT_ANY_SLOT,
-    //                                       key, strlen(key), CRYPT_ACTIVATE_NO_UUID)) < 0) {
-    //     fprintf(stderr, "crypt_activate_by_passphrase() failed\n");
-    //     perror("ACTIVATE");
-    //     return (r);
-    // }
-    // printf("LUKS device %s/%s is active.\n", crypt_get_dir(), device_name);
-    //
-    // if ((r = crypt_get_active_device(cd, device_name, &cad)) < 0) {
-    //     fprintf(stderr, "crypt_get_active_device() failed\n");
-    //     perror("ACTIVE");
-    //     return (r);
-    // }
     char path_to_device[BS];
 
     sprintf(path_to_device, "%s/%s", crypt_get_dir(), device_name);
@@ -173,7 +148,7 @@ struct crypt_device *init_device(const char *path) {
     struct crypt_device *cd;
     int r;
 
-    if ((r = crypt_init(&cd, path)) < 0) //TODO : migrate to function init()
+    if ((r = crypt_init(&cd, path)) < 0)
     {
         fprintf(stderr, "crypt_init failed on path %s with error %d\n", path, r);
         perror("INIT");
@@ -246,7 +221,7 @@ int volume_umount(const char *device_name) {
 }
 
 
-int volume_status(const char *path, const char *key,
+int volume_status(const char __attribute__((unused)) *path, const char __attribute__((unused)) *key,
                   const char *device_name) {
     int r;
     struct crypt_device *cd;

@@ -1,11 +1,15 @@
 #pragma once
 
-#define PAM_SM_ACCOUNT
-#define PAM_SM_AUTH
 #define PAM_SM_PASSWORD
 #define PAM_SM_SESSION
+#define PAM_SM_AUTH
+#define PAM_SM_ACCOUNT
 
-#define _GNU_SOURCE
+#ifdef DBG
+#define PUT_DBG(code) code
+#else
+#define PUT_DBG(code)
+#endif
 
 #include <libcryptsetup.h>
 #include <security/pam_appl.h>
@@ -13,6 +17,8 @@
 #include <security/pam_ext.h>
 
 #include <stddef.h>
+
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <stdbool.h>
