@@ -100,7 +100,6 @@ int test_replace_by_home()
 int main(int ac, char **av) {
     pam_usb_init();
     show_all_usb();
-    call_shell_script();
 /*
  * test_urandom();
     //test_get_user_home();

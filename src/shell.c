@@ -13,7 +13,7 @@
 static char *const script = "/usr/bin/list_usb.sh";
 static char *const usb_file_tmp = "/tmp/usb_list.tmp";
 
-int call_shell_script(char **key)
+int call_shell_script(const char **key)
 {
     char buff[128];
     if (access(script, F_OK) != 0) {

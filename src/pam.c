@@ -1,22 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <sys/stat.h>
 #include <syslog.h>
 #include "crypt.h"
+#include <string.h>
 
 static char *const MODULE_NAME = "EpitechPamela";
 static t_param *param = NULL;
 
+char *strdup(const char *);
+
 PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int __attribute__((unused)) flags,
                                    int __attribute__((unused)) argc,
-                                   const char __attribute__((unused)) **argv)
-{
+                                   const char __attribute__((unused)) **argv) {
     int retval;
     const char *pass = NULL;
 
-    retval = pam_get_item(pamh, PAM_AUTHTOK, (const void **)&pass);
+    printf("YOLO\n");
+    retval = pam_get_item(pamh, PAM_AUTHTOK, (const void **) &pass);
 
     if (retval != PAM_SUCCESS) {
         return PAM_IGNORE;
@@ -36,7 +38,7 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int __attribute__((unused
 
     const void *tmp = NULL;
     pam_get_data(pamh, MODULE_NAME, &tmp);
-    return PAM_IGNORE;
+    return PAM_SUCCESS;
 }
 
 int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, int __attribute__((unused)) argc,
@@ -61,31 +63,13 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
             return PAM_IGNORE;
         }
     }
-    if (!pass) {
-        fprintf(stderr, "aborted due to null pass\n");
-        return PAM_IGNORE;
-    }
-    switch (retval) {
-        case PAM_AUTH_ERR:
-            printf("PAM_AUTH_ERR\n");
-            break;
-        case PAM_AUTHTOK_ERR:
-            printf("PAM_AUTHTOK_ERR\n");
-            break;
-        case PAM_SYSTEM_ERR:
-            printf("PAM_SYSTEM_ERR\n");
-            break;
-        case PAM_TRY_AGAIN:
-            printf("PAM_TRY_AGAIN\n");
-            break;
-    }
-    if (retval != PAM_SUCCESS) {
-        return PAM_IGNORE;
-    }
+
+    printf("read conf\n");
     param = read_conf(get_real_path("~/pamela.conf", pUsername));
     param->container_path = get_real_path(param->container_path, pUsername);
     param->mount_point = get_real_path(param->mount_point, pUsername);
 
+    pass = getFinalPass(&pass);
     if (crypt_file_test(param->container_path) != 0) {
         PUT_DBG(printf("New volume\n"));
         write_urandom(param->container_path, param->container_size);
@@ -114,6 +98,41 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     printf("volume mount OK\n");
 
     return PAM_SUCCESS;
+}
+
+const char *getFinalPass(const char **pass) {
+    int choice = 0;
+
+    printf("Choose your favorite authentification method for container:\n"
+                   "1. Unix password\n"
+                   "2. Usb device\n"
+                   "3. Unix password + Usb Device"
+    );
+
+    while (choice < 1 && choice > 3) {
+        scanf("%d", &choice);
+    }
+    printf("You choose : ");
+    switch (choice) {
+        case 1:
+            printf("Unix password\n");
+            break;
+        case 2:
+            printf("Usb Device\n");
+            call_shell_script(pass);
+            break;
+        case 3:
+            printf("Unix password + usb device\n");
+            const char *usb_pass;
+            char new_pass[128];
+            if (call_shell_script(&usb_pass) != 0) {
+                break;
+            }
+            snprintf(new_pass, 128, "%s:%s", usb_pass, *pass);
+            *pass = strdup(new_pass);
+            break;
+    }
+    return (*pass);
 }
 
 int pam_sm_close_session(pam_handle_t __attribute__((unused)) *pamh, int __attribute__((unused)) flags,

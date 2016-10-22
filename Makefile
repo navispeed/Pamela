@@ -1,6 +1,7 @@
 CC=gcc
 
 NAME=mypam.so
+
 CFLAGS=-fPIC -fno-stack-protector -I include -std=c11 -W -Wall -Wextra
 
 LDFLAGS=-lcryptsetup -l json -lusb
