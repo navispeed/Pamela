@@ -99,7 +99,9 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
         if (volume_create(param->container_path, pass, param->device_name) != 0)
             return PAM_IGNORE;
     } else {
-        crypt_activate_device(param->container_path, pass, param->device_name);
+        if (crypt_activate_device(param->container_path, pass, param->device_name) != 0) {
+            return PAM_IGNORE;
+        }
     }
 
     if (init_device(param->container_path) == NULL) {
