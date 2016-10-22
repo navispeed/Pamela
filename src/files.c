@@ -7,14 +7,6 @@
 #include <unistd.h>
 #include <crypt.h>
 
-static struct stat *get_file(const char *path)
-{
-    struct stat *s = calloc(1, sizeof(struct stat));
-
-    stat(path, s);
-    return s;
-}
-
 const char *get_user_home(const char *username)
 {
     const char    *homedir;

@@ -6,10 +6,12 @@
 #include <syslog.h>
 #include "crypt.h"
 
-static char *const MODULE_NAME = "esteban";
+static char *const MODULE_NAME = "EpitechPamela";
 static t_param *param = NULL;
 
-PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, const char **argv)
+PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int __attribute__((unused)) flags,
+                                   int __attribute__((unused)) argc,
+                                   const char __attribute__((unused)) **argv)
 {
     int retval;
     const char *pass = NULL;
@@ -42,10 +44,6 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     int retval;
     const char *pass = NULL;
     const char *pUsername;
-
-    for (int i = 0; i < argc; ++i) {
-        printf("argv[%d]: %s\n", i, argv[i]);
-    }
 
     retval = pam_get_user(pamh, &pUsername, "Username: ");
     if (retval == PAM_ABORT) {
@@ -84,7 +82,6 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     if (retval != PAM_SUCCESS) {
         return PAM_IGNORE;
     }
-    //printf("user: %s, pass: %s\n", pUsername, pass);
     param = read_conf(get_real_path("~/pamela.conf", pUsername));
     param->container_path = get_real_path(param->container_path, pUsername);
     param->mount_point = get_real_path(param->mount_point, pUsername);

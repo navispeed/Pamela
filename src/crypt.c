@@ -82,7 +82,7 @@ void mkfs_format(const char *path) {
     system(buff);
 }
 
-static int free_crypt(struct crypt_device *cd) {
+static __attribute__((unused)) int free_crypt(struct crypt_device *cd) {
     crypt_free(cd);
     return (0);
 }
@@ -98,7 +98,7 @@ int crypt_volume(struct crypt_device *cd,
     return (0);
 }
 
-void dump_device(const char *device_name, struct crypt_device *cd) {
+void dump_device(const char __attribute__((unused)) *device_name, struct crypt_device __attribute__((unused)) *cd) {
     PUT_DBG(
             printf("LUKS device %s/%s gonna be activate.\n", crypt_get_dir(), device_name);
             printf("\tcipher used: %s\n", crypt_get_cipher(cd));
@@ -221,7 +221,7 @@ int volume_umount(const char *device_name) {
 }
 
 
-int volume_status(const char *path, const char *key,
+int volume_status(const char __attribute__((unused)) *path, const char __attribute__((unused)) *key,
                   const char *device_name) {
     int r;
     struct crypt_device *cd;
