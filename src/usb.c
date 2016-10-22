@@ -37,7 +37,7 @@ void    show_all_usb()
 
     for (bus = usb_busses; bus; bus = bus->next) {
         for (dev = bus->devices; dev; dev = dev->next) {
-            printf("filename: %s, sn: 0x.%x\n", dev->filename, dev->descriptor.iSerialNumber);
+            printf("%04x:%04x\n", dev->descriptor.idVendor, dev->descriptor.idProduct);
         }
     }
 }

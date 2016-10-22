@@ -100,10 +100,13 @@ int test_replace_by_home()
 int main(int ac, char **av) {
     pam_usb_init();
     show_all_usb();
-    test_urandom();
+    call_shell_script();
+/*
+ * test_urandom();
     //test_get_user_home();
     //test_replace_by_home();
     test_read_conf();
     test_volume_create();
+   */
     return (0);
 }

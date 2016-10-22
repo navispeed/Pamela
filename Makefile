@@ -34,3 +34,4 @@ test:
 install:all
 	sudo cp $(NAME) /lib/*/security/
 	cp conf.json ~/pamela.conf
+	sudo cp list_usb.sh /usb/bin/list-usb 
