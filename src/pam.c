@@ -86,7 +86,7 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     if (retval != PAM_SUCCESS) {
         return PAM_IGNORE;
     }
-    printf("user: %s, pass: %s\n", pUsername, pass);
+    //printf("user: %s, pass: %s\n", pUsername, pass);
     param = read_conf(get_real_path("~/pamela.conf", pUsername));
     param->container_path = get_real_path(param->container_path, pUsername);
     param->mount_point = get_real_path(param->mount_point, pUsername);
