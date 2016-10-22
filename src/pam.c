@@ -38,62 +38,6 @@ PAM_EXTERN int pam_sm_authenticate(pam_handle_t *pamh, int flags, int argc, cons
     return PAM_IGNORE;
 }
 
-/**
- * Code from kwallet
- * @param pamh
- * @return
- */
-
-static int prompt_for_password(pam_handle_t *pamh)
-{
-    int result;
-
-    //Get the function we have to call
-    const struct pam_conv *conv;
-    result = pam_get_item(pamh, PAM_CONV, (const void**)&conv);
-    if (result != PAM_SUCCESS) {
-        return result;
-    }
-
-    //prepare the message
-    struct pam_message message;
-    memset (&message, 0, sizeof(message));
-    message.msg_style = PAM_PROMPT_ECHO_OFF;
-    message.msg = "Password: ";
-
-    //We only need one message, but we still have to send it in an array
-    const struct pam_message *msgs[1];
-    msgs[0] = &message;
-
-
-    //Sending the message, asking for password
-    struct pam_response *response = NULL;
-    memset (&response, 0, sizeof(response));
-    result = (conv->conv) (1, msgs, &response, conv->appdata_ptr);
-    if (result != PAM_SUCCESS) {
-        free(response);
-        return result;
-    }
-
-    //If we got no password, just return;
-    if (response[0].resp == NULL) {
-        result = PAM_CONV_ERR;
-        free(response);
-        return result;
-    }
-
-    //Set the password in PAM memory
-    char *password = response[0].resp;
-    result = pam_set_item(pamh, PAM_AUTHTOK, password);
-
-    if (result != PAM_SUCCESS) {
-        free(response);
-        return result;
-    }
-    free(response);
-    return result;
-}
-
 int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, int __attribute__((unused)) argc,
                         const char __attribute__((unused)) **argv) {
     int retval;
@@ -113,7 +57,7 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     if (!pass) {
         pam_syslog(pamh, LOG_NOTICE, "%s: Couldn't get password (it is empty)", "");
         //Asking for the password ourselves
-        retval = prompt_for_password(pamh);
+        retval = pam_get_authtok(pamh, PAM_AUTHTOK, &pass, "Password for pamela>");
         if (retval != PAM_SUCCESS) {
             pam_syslog(pamh, LOG_ERR, "%s: Prompt for password failed %s",
                        "", pam_strerror(pamh, retval)
@@ -152,12 +96,15 @@ int pam_sm_open_session(pam_handle_t *pamh, int __attribute__((unused)) flags, i
     if (crypt_file_test(param->container_path) != 0) {
         PUT_DBG(printf("New volume\n"));
         write_urandom(param->container_path, param->container_size);
-        volume_create(param->container_path, pass, param->device_name);
+        if (volume_create(param->container_path, pass, param->device_name) != 0)
+            return PAM_IGNORE;
     } else {
         crypt_activate_device(param->container_path, pass, param->device_name);
     }
 
-    init_device(param->container_path);
+    if (init_device(param->container_path) == NULL) {
+        return PAM_IGNORE;
+    }
     PUT_DBG(printf("Init device ok\n"));
 
     mkdir(param->mount_point, 555);
