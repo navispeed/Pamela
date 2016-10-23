@@ -67,23 +67,22 @@ void test_volume_create() {
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_crypt_file_test\033[0m\n");
     r = crypt_file_test("test");
     if (r == 0)
-    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_crypt_file_test PASSED\033[0m\n\n");
+        fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_crypt_file_test PASSED\033[0m\n\n");
     else
-    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_crypt_file_test FAILED\033[0m\n\n");
+        fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_crypt_file_test FAILED\033[0m\n\n");
 
     //crypt activate device (path, key, device_name)
     fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[34;01mtest_crypt_activate_device\033[0m\n");
     r = crypt_activate_device("test", "1234", "device_name");
     if (r == 0)
-    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_crypt_activate_device PASSED\033[0m\n\n");
+        fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[32;01mtest_crypt_activate_device PASSED\033[0m\n\n");
     else
-    fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_crypt_activate_device FAILED\033[0m\n\n");
+        fprintf(stdout, "~~~~~~~~~~~~~~~~~~~~~~\033[31;01mtest_crypt_activate_device FAILED\033[0m\n\n");
 
     desactivate_device("device_name");
 }
 
-int test_get_user_home()
-{
+int test_get_user_home() {
     unsetenv("HOME");
     assert(strcmp("/root", get_user_home("root")) == 0);
     assert(strcmp("/home/greg", get_user_home("greg")) == 0);
@@ -91,17 +90,21 @@ int test_get_user_home()
     return 0;
 }
 
-int test_replace_by_home()
-{
+int test_replace_by_home() {
     assert(strcmp("/root/conf.json", get_real_path("~/conf.json", "root")) == 0);
     assert(strcmp("/home/greg/conf.json", get_real_path("~/conf.json", "greg")) == 0);
 }
 
 int main(int ac, char **av) {
     test_urandom();
+    const char *key;
+    call_shell_script(NULL, &key);
+    printf("key: %s\n", key);
+    /*
     //test_get_user_home();
     //test_replace_by_home();
     test_read_conf();
     test_volume_create();
+    */
     return (0);
 }
